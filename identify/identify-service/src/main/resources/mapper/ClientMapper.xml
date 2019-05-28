@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.ClientMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.Client">
+        <id property="id" column="id"/>
+        <collection property="clientFileList" column="id"
+                    select="com.thinvent.nj.identify.mapper.ClientFileMapper.getClientFileList"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CLIENT
+        WHERE DELETE_FLAG = 0
+          AND id = #{id}
+    </select>
+
+    <select id="getClientByMainId" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CLIENT
+        WHERE DELETE_FLAG = 0
+          AND MAIN_ID = #{mainId}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CLIENT
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.Client">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_CLIENT (
+        ID,
+        MAIN_ID,
+        CLIENT_NAME,
+        CONTACT_NAME,
+        PHONE,
+        NATURE,
+        CONTENT,
+        CONDITION,
+        PROPERTY_NUM,
+        ID_NUM,
+        PHONE2,
+        CLIENT_IDENTIFY_FILE_ID
+        )
+        VALUES (
+        #{id},
+        #{mainId},
+        #{clientName},
+        #{contactName},
+        #{phone},
+        #{nature},
+        #{content},
+        #{condition},
+        #{propertyNum},
+        #{idNum},
+        #{phone2},
+        #{clientIdentifyFileId}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.Client">
+        UPDATE T_IDENTIFY_CLIENT
+        SET
+            ID           = #{id},
+            MAIN_ID      = #{mainId},
+            CLIENT_NAME  = #{clientName},
+            CONTACT_NAME = #{contactName},
+            PHONE        = #{phone},
+            PHONE2       = #{phone2},
+            NATURE       = #{nature},
+            CONTENT      = #{content},
+            CONDITION    = #{condition},
+            CLIENT_IDENTIFY_FILE_ID    = #{clientIdentifyFileId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM T_IDENTIFY_CLIENT
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

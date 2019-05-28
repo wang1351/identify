@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.ScoreRuleMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.ScoreRule">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_SCORE_RULE
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_SCORE_RULE
+        WHERE DELETE_FLAG = 0
+        AND SCORE_TYPE = #{scoreType}
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.ScoreRule">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_SCORE_RULE (
+            ID,
+            SCORE_TYPE,
+            SCORE_ITEM
+        )
+        VALUES (
+            #{id},
+            #{scoreType},
+            #{scoreItem}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.ScoreRule">
+        UPDATE T_IDENTIFY_SCORE_RULE
+        SET
+            ID = #{id},
+            SCORE_TYPE = #{scoreType},
+            SCORE_ITEM = #{scoreItem}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_SCORE_RULE
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

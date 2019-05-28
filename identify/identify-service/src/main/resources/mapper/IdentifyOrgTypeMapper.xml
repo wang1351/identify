@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyOrgTypeMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyOrgType">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_TYPE
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_TYPE
+        WHERE DELETE_FLAG = 0
+    </select>
+
+
+
+    <select id="getIdentifyOrgTypeListByMainId" parameterType="string" resultMap="map">
+      SELECT  a.*,c.NAME
+      FROM T_IDENTIFY_ORG_TYPE a, T_BASE_DICT_GROUP b,T_BASE_DICT_ITEM c
+     where a.IDENTIFY_TYPE_KEY=c.VALUE and b.id=c.GROUP_ID and b.KEY='IDENTIFY_TYPE' AND IDENTIFY_ORG_ID=#{orgId}
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgType">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ORG_TYPE (
+            ID,
+            IDENTIFY_ORG_ID,
+            IDENTIFY_TYPE_KEY
+        )
+        VALUES (
+            #{id},
+            #{identifyOrgId},
+            #{identifyTypeKey}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgType">
+        UPDATE T_IDENTIFY_ORG_TYPE
+        SET
+            ID = #{id},
+            IDENTIFY_ORG_ID = #{identifyOrgId},
+            IDENTIFY_TYPE_KEY = #{identifyOrgKey}
+        WHERE id = #{id}
+    </update>
+
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ORG_TYPE
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

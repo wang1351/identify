@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- add by xujc 2018/11/30 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.ExpertMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.Expert">
+        <id property="id" column="id"/>
+        <collection property="list" ofType="com.thinvent.nj.identify.entity.ExpertBusinessArea"
+                    column="expertId=id" select="com.thinvent.nj.identify.mapper.ExpertMapper.getByExpertId">
+
+        </collection>
+    </resultMap>
+
+    <select id="get" resultMap="map" parameterType="string">
+        SELECT
+          a.ID,
+          a.NAME,
+          a.IDENTIFIED_CODE,
+          a.NATION,
+          a.SEX,
+          a.EDUCATION,
+          a.DEGREE,
+          a.HEALTH,
+          a.BIRTHDAY,
+          a.PRACTICE,
+          a.TITLE,
+          a.COMPANY_NAME,
+          a.PRACTICE_NUM,
+          a.PHOTO,
+          a.APPLY_ID,
+          a.IN_DATE,
+          a.phone,
+          a.email,
+          a.use_Status,
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.NATION) AND GROUP_ID = (SELECT ID
+                                                           FROM T_BASE_DICT_GROUP
+                                                           WHERE key = 'NATION'))         NATION_NAME,
+
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.SEX) AND GROUP_ID = (SELECT ID
+                                                        FROM T_BASE_DICT_GROUP
+                                                        WHERE key = 'SEX'))               SEX_NAME,
+
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.EDUCATION) AND GROUP_ID = (SELECT ID
+                                                              FROM T_BASE_DICT_GROUP
+                                                              WHERE key = 'EDUCATION'))   EDUCATION_NAME,
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.DEGREE) AND GROUP_ID = (SELECT ID
+                                                           FROM T_BASE_DICT_GROUP
+                                                           WHERE key = 'DEGREE'))         DEGREE_NAME,
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.HEALTH) AND GROUP_ID = (SELECT ID
+                                                           FROM T_BASE_DICT_GROUP
+                                                           WHERE key = 'HEALTH'))         HEALTH_NAME,
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.PRACTICE) AND GROUP_ID = (SELECT ID
+                                                             FROM T_BASE_DICT_GROUP
+                                                             WHERE key = 'PRACTICE'))     PRACTICE_NAME,
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.TITLE) AND GROUP_ID = (SELECT ID
+                                                          FROM T_BASE_DICT_GROUP
+                                                          WHERE key = 'TITLE'))           TITLE_NAME,
+          (SELECT NAME
+           FROM T_BASE_DICT_ITEM
+           WHERE VALUE = to_char(a.USE_STATUS) AND GROUP_ID = (SELECT ID
+                                                               FROM T_BASE_DICT_GROUP
+                                                               WHERE key = 'USE_STATUS')) USE_STATUS_NAME
+
+
+        FROM T_IDENTIFY_EXPERT a
+        WHERE a.ID = #{id}
+
+
+    </select>
+    <select id="getByExpertId" resultType="com.thinvent.nj.identify.entity.ExpertBusinessArea">
+        SELECT a.ID,a.EXPERT_ID,a.EXPERT_FIELD,
+        (SELECT b.NAME FROM T_BASE_DICT_ITEM b where b."VALUE"=to_char(a.EXPERT_FIELD)
+        and b.GROUP_ID= (SELECT id from T_BASE_DICT_GROUP where key = 'EXPERT_BUSINESS_AREA')) EXPERT_BUSINESS_AREA
+        FROM  T_IDENTIFY_EXPERT_FIELD a
+        where
+
+         a.EXPERT_ID = #{expertId} AND a.DELETE_FLAG=0
+    </select>
+    <!-- add by xujc 2018/11/30 end -->
+    <!-- add by panqh 2018-11-29 start -->
+    <select id="getExpertFieldByField" resultType="com.thinvent.nj.identify.entity.ExpertBusinessArea">
+        SELECT
+            EF.ID,
+            EF.EXPERT_ID,
+            EF.EXPERT_FIELD
+        FROM  T_IDENTIFY_EXPERT_FIELD EF,T_IDENTIFY_EXPERT E
+        WHERE EF.DELETE_FLAG = 0 and E.DELETE_FLAG= 0 and E.USE_STATUS=1 and EF.EXPERT_ID=E.ID
+        AND EF.EXPERT_FIELD = #{expertField}
+        <if test="excExpertIdS !=null and excExpertIdS.length > 0">
+            AND EF.EXPERT_ID NOT In
+            <foreach item="item" index="index" collection="excExpertIdS" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+
+        </if>
+    </select>
+    <!-- add by panqh 2018-11-29 end -->
+    <!-- add by xujc 2018/11/30 start -->
+    <select id="getFieldNameByField" resultType="string">
+        SELECT b.NAME expertFieldName
+        FROM T_BASE_DICT_ITEM b, T_BASE_DICT_GROUP c
+        WHERE b.VALUE = #{field} AND b.GROUP_ID = c.ID AND c.KEY = 'EXPERT_BUSINESS_AREA'
+    </select>
+    <select id="findList" resultMap="map">
+        SELECT
+        a.ID,
+        a.NAME,
+        a.IDENTIFIED_CODE,
+        a.NATION,
+        a.SEX,
+        a.EDUCATION,
+        a.DEGREE,
+        a.HEALTH,
+        a.BIRTHDAY,
+        a.PRACTICE,
+        a.TITLE,
+        a.COMPANY_NAME,
+        a.PRACTICE_NUM,
+        a.PHOTO,
+        a.APPLY_ID,
+        a.IN_DATE,
+        a.phone,
+        a.email,
+        a.use_Status,
+        (SELECT NAME
+        FROM T_BASE_DICT_ITEM
+        WHERE VALUE = to_char(a.NATION) AND GROUP_ID = (SELECT ID
+        FROM T_BASE_DICT_GROUP
+        WHERE key = 'NATION')) NATION_NAME,
+
+        (SELECT NAME
+        FROM T_BASE_DICT_ITEM
+        WHERE VALUE = to_char(a.SEX) AND GROUP_ID = (SELECT ID
+        FROM T_BASE_DICT_GROUP
+        WHERE key = 'SEX')) SEX_NAME,
+
+        (SELECT NAME
+        FROM T_BASE_DICT_ITEM
+        WHERE VALUE = to_char(a.EDUCATION) AND GROUP_ID = (SELECT ID
+        FROM T_BASE_DICT_GROUP
+        WHERE key = 'EDUCATION')) EDUCATION_NAME,
+        (SELECT NAME
+        FROM T_BASE_DICT_ITEM
+        WHERE VALUE = to_char(a.DEGREE) AND GROUP_ID = (SELECT ID
+        FROM T_BASE_DICT_GROUP
+        WHERE key = 'DEGREE')) DEGREE_NAME,
+        (SELECT NAME
+        FROM T_BASE_DICT_ITEM
+        WHERE VALUE = to_char(a.HEALTH) AND GROUP_ID = (SELECT ID
+        FROM T_BASE_DICT_GROUP
+        WHERE key = 'HEALTH')) HEALTH_NAME,
+
+        (SELECT NAME
+        FROM T_BASE_DICT_ITEM
+        WHERE VALUE = to_char(a.USE_STATUS) AND GROUP_ID = (SELECT ID
+        FROM T_BASE_DICT_GROUP
+        WHERE key = 'USE_STATUS')) USE_STATUS_NAME
+
+
+        FROM T_IDENTIFY_EXPERT a
+        WHERE
+        a.DELETE_FLAG=0
+
+        <if test="fullName !=null and fullName !=''">
+            and a.NAME LIKE '%'||#{fullName}||'%'
+        </if>
+        <if test="companyName !=null and companyName !=''">
+            AND a.COMPANY_NAME LIKE '%'||#{companyName}||'%'
+        </if>
+        <if test="title !=null and title !=''">
+            AND a.TITLE LIKE '%'||#{title}||'%'
+        </if>
+        <if test="practice !=null and practice !=''">
+            AND a.PRACTICE LIKE '%'||#{practice}||'%'
+        </if>
+        <if test="status !=null and status !=''">
+            AND a.USE_STATUS =#{status}
+        </if>
+
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.Expert">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_EXPERT
+        VALUES (
+        #{id},
+        #{name},
+        #{identifiedCode},
+        #{nation},
+        #{sex},
+        #{education},
+        #{degree},
+        #{health},
+        #{birthday},
+        #{practice},
+        #{title},
+        #{companyName},
+        #{practiceNum},
+        #{phone},
+        #{email},
+        #{photo},
+        #{applyId},
+        sysdate,
+        sysdate,#{createUsername},#{createUser},#{updateTime},#{updateUsername},#{updateUser},#{deleteTime},#{deleteUsername},#{deleteUser},0,#{useStatus}
+        )
+
+    </insert>
+
+    <insert id="addExpertBusinessArea" parameterType="com.thinvent.nj.identify.entity.ExpertBusinessArea">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_EXPERT_FIELD
+        VALUES (
+        #{id},
+        #{expertId},
+        #{expertField},
+        sysdate,#{createUsername},#{createUser},#{updateTime},#{updateUsername},#{updateUser},#{deleteTime},#{deleteUsername},#{deleteUser},0
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.Expert">
+        UPDATE T_IDENTIFY_EXPERT
+        SET
+
+            IN_DATE = #{inDate},
+            IDENTIFIED_CODE = #{identifiedCode},
+            NATION = #{nation},
+            SEX = #{sex},
+            EDUCATION = #{education},
+            DEGREE = #{degree},
+            HEALTH = #{health},
+            BIRTHDAY = #{birthday},
+            PRACTICE = #{practice},
+            TITLE = #{title},
+            COMPANY_NAME = #{companyName},
+            PRACTICE_NUM = #{practiceNum},
+            PHONE = #{phone},
+            EMAIL = #{email},
+            PHOTO = #{photo},
+            APPLY_ID = #{applyId},
+            NAME = #{name},
+            USE_STATUS = #{useStatus},
+             update_Time= sysdate,
+              update_User_name =#{updateUsername},
+            update_User =#{updateUser}
+
+
+
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteLogic" parameterType="com.thinvent.nj.identify.entity.Expert">
+        UPDATE T_IDENTIFY_EXPERT
+        SET
+              DELETE_Time= sysdate,
+              DELETE_User_name =#{updateUsername},
+              DELETE_User =#{updateUser},
+              DELETE_FLAG = 1
+
+        WHERE id = #{id}
+    </delete>
+    <delete id="deleteExpertBusinessArea" parameterType="com.thinvent.nj.identify.entity.Expert">
+        UPDATE T_IDENTIFY_EXPERT_FIELD
+        SET
+        DELETE_Time= sysdate,
+        DELETE_User_name =#{updateUsername},
+        DELETE_User =#{updateUser},
+        DELETE_FLAG = 1
+
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
+<!-- add by xujc 2018/11/30 end -->

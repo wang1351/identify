@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.CreditGradeMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.CreditGrade">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CREDIT_GRADE
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CREDIT_GRADE
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.CreditGrade">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_CREDIT_GRADE (
+                ID,
+                NAME,
+                GET,
+                LET,
+                REMARKS,
+                SEQ
+        )
+        VALUES (
+            #{id},
+            #{name},
+            #{get},
+            #{let},
+            #{remarks},
+            #{seq}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.CreditGrade">
+        UPDATE T_IDENTIFY_CREDIT_GRADE
+        SET
+            ID = #{id},
+            NAME = #{name},
+            GET = #{get},
+            LET = #{let},
+            REMARKS = #{remarks},
+            SEQ = #{seq}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_CREDIT_GRADE
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getByName" parameterType="String" resultMap="map">
+       SELECT *
+        FROM T_IDENTIFY_CREDIT_GRADE
+        WHERE NAME = #{name}
+
+
+    </select>
+
+
+
+</mapper>

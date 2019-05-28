@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyMainMapper">
+    <resultMap id="origin" type="com.thinvent.nj.identify.entity.IdentifyMain">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyMain">
+        <id property="id" column="id"/>
+        <association property="client" column="id" select="com.thinvent.nj.identify.mapper.ClientMapper.getClientByMainId"/>
+        <association property="house" column="id" select="com.thinvent.nj.identify.mapper.HouseMapper.getHouseByMainId"/>
+        <association property="newProject" column="id" select="com.thinvent.nj.identify.mapper.NewProjectMapper.getNewProjectByMainId"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT M.ID,
+        M.CASE_NO,
+        M.ORG_ID,
+        M.STATUS,
+        M.METHOD,
+        M.REQUEST_TIME,
+        M.CONTENT,
+        M.OTHER_CONTENT,
+        M.OPERATOR_TIME,
+        M.UNFINISHED_COUNT,
+        M.IS_CORRECT,
+        M.IS_REVIEW,
+        O.FULL_NAME orgName,
+    (SELECT I.NAME FROM T_BASE_DICT_ITEM I, T_BASE_DICT_GROUP G
+    WHERE I.GROUP_ID = G.ID and G.KEY = 'IDENTIFY_TYPE' AND I.VALUE = M.CONTENT) jd,
+    (select II.NAME FROM  T_BASE_DICT_ITEM II, T_BASE_DICT_GROUP GG
+    WHERE II.GROUP_ID = GG.ID and GG.KEY = 'RATING_LEVEL' AND II.VALUE = M.RATING_LEVEL) ratingLevelName,
+     (select DI.NAME FROM  T_BASE_DICT_ITEM DI, T_BASE_DICT_GROUP DG
+    WHERE DI.GROUP_ID = DG.ID and DG.KEY = 'RATING_TYPE' AND DI.VALUE = M.RATING_TYPE) ratingTypeName
+  FROM T_IDENTIFY_MAIN M
+  JOIN T_BASE_ORG O ON M.ORG_ID = O.ID
+  WHERE M.DELETE_FLAG = 0
+  AND  M.id = #{id}
+    </select>
+
+
+    <select id="findList" parameterType="map" resultMap="origin">
+        SELECT
+        M.ID,
+        M.CASE_NO,
+        O.Full_NAME orgName,
+        i.NAME zone,
+        j.name street,
+        H.ADDRESS address,
+        M.STATUS,
+        M.SUSPEND,
+        M.METHOD,
+        M.OPERATOR_TIME,
+        M.UNFINISHED_COUNT,
+        M.REQUEST_TIME,
+        M.IS_REVIEW,
+        M.IS_CORRECT
+        FROM T_IDENTIFY_MAIN M
+        JOIN T_IDENTIFY_HOUSE H ON M.ID = H.MAIN_ID
+        JOIN T_BASE_ORG O ON M.ORG_ID = O.ID
+        JOIN T_BASE_DICT_ITEM I on H.ZONE =i.VALUE and i.GROUP_ID =(SELECT id from T_BASE_DICT_GROUP where KEY = 'ZONE')
+        JOIN T_BASE_DICT_ITEM j ON H.STREET =j.VALUE and j.GROUP_ID =(SELECT id from T_BASE_DICT_GROUP where KEY = 'STREET')
+        WHERE M.DELETE_FLAG = 0
+        <if test='type != null and type =="1"'>
+            and M.id not in (SELECT MAIN_ID FROM T_IDENTIFY_REVIEW where DELETE_FLAG=0)
+        </if>
+        <if test='type != null and type =="2"'>
+            and M.id not in (SELECT MAIN_ID FROM T_IDENTIFY_CORRECT where DELETE_FLAG=0)
+        </if>
+        <if test="caseNo != null and caseNo !=''">
+            AND M.CASE_NO LIKE '%'||#{caseNo}||'%'
+        </if>
+
+        <if test="addressSearch != null and addressSearch !=''">
+            AND  H.ADDRESS  LIKE '%'||#{addressSearch}||'%'
+        </if>
+
+        <if test="applySearch != null and applySearch !=''">
+            AND M.METHOD LIKE '%'||#{applySearch}||'%'
+        </if>
+        <if test="nowSearch != null and nowSearch !=''">
+            AND M.STATUS =#{nowSearch}
+        </if>
+        <if test="content != null and content !=''">
+            AND M.CONTENT = #{content}
+        </if>
+        <if test="orgSearch != null and orgSearch !=''">
+            AND M.ORG_ID = #{orgSearch}
+        </if>
+        <if test="region != null and region !=''">
+            AND H.ZONE = #{region}
+        </if>
+        <if test="street != null and street !=''">
+            AND H.STREET = #{street}
+        </if>
+        <if test="zone !=null and zone !=''">
+            and H.Zone = #{zone}
+        </if>
+        <if test="street !=null and street !=''">
+            and H.street = #{street}
+        </if>
+
+        <if test="method != null and method !=''">
+            AND M.METHOD = #{method}
+        </if>
+        <if test="status != null and status !=''">
+            AND M.STATUS = #{status}
+        </if>
+        <if test="startTime != null and startTime !=''">
+            AND M.REQUEST_TIME  >= TO_DATE(#{startTime},'yyyy-MM-dd HH24:mi:ss')
+        </if>
+        <if test="endTime != null and endTime !=''">
+            <![CDATA[AND M.REQUEST_TIME <= TO_DATE(#{endTime},'yyyy-MM-dd HH24:mi:ss')]]>
+        </if>
+        <if test="startTimeSearch != null and startTimeSearch !=''">
+            AND M.OPERATOR_TIME  >= TO_DATE(#{startTimeSearch},'yyyy-MM-dd HH24:mi:ss')
+        </if>
+        <if test="endTimeSearch != null and endTimeSearch !=''">
+            AND to_char(M.OPERATOR_TIME,'yyyy-MM-dd') &lt;= #{endTimeSearch}
+        </if>
+        <if test="suspend !=null and suspend !=''">
+            AND M.suspend =#{suspend}
+        </if>
+
+        <if test="mainIdList != null and mainIdList.size() !=0">
+            AND M.ID IN
+            <foreach collection="mainIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+        ORDER BY OPERATOR_TIME
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyMain">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_MAIN (
+            ID,
+            CASE_NO,
+            ORG_ID,
+            STATUS,
+            SUSPEND,
+            METHOD,
+            REQUEST_TIME,
+            CONTENT,
+            RATING_LEVEL,
+            RATING_TYPE,
+            IS_REVIEW,
+            IS_CORRECT,
+            OTHER_CONTENT,
+            OPERATOR_TIME,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+            #{id},
+            #{caseNo},
+            #{orgId},
+            #{status},
+            #{suspend},
+            #{method},
+            #{requestTime},
+            #{content},
+            #{ratingLevel},
+            #{ratingType},
+            #{isReview},
+            #{isCorrect},
+            #{otherContent},
+            #{operatorTime},
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyMain">
+        UPDATE T_IDENTIFY_MAIN
+        SET
+            ID = #{id},
+            CASE_NO = #{caseNo},
+            ORG_ID = #{orgId},
+            STATUS = #{status},
+            SUSPEND = #{suspend},
+            METHOD = #{method},
+            REQUEST_TIME = #{requestTime},
+            CONTENT = #{content},
+            RATING_LEVEL = #{ratingLevel},
+            RATING_TYPE = #{ratingType},
+            IS_REVIEW = #{isReview},
+            IS_CORRECT = #{isCorrect},
+            OTHER_CONTENT = #{otherContent},
+            UNFINISHED_COUNT = #{unfinishedCount},
+            OPERATOR_TIME = #{operatorTime}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateMainStatus" parameterType="com.thinvent.nj.identify.entity.IdentifyMain">
+        UPDATE T_IDENTIFY_MAIN
+        SET
+        STATUS = #{status},
+        OPERATOR_TIME = SYSDATE
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateMainProcessStatus">
+        UPDATE T_IDENTIFY_MAIN
+        SET
+            SUSPEND = #{processStatus},
+            OPERATOR_TIME = SYSDATE
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_MAIN
+        WHERE id = #{id}
+    </delete>
+
+    <!-- add by panqh 2018-11-13 start -->
+    <select id="getMaxCaseNo" parameterType="string" resultType="String">
+        SELECT
+            MAX(CASE_NO)
+        FROM
+            T_IDENTIFY_MAIN
+        WHERE
+            DELETE_FLAG = 0
+        AND CASE_NO LIKE '%'||#{formatterDate}||'%'
+    </select>
+    <!-- add by panqh 2018-11-13 end -->
+
+</mapper>

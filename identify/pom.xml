@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.thinvent.nj</groupId>
+        <artifactId>udp-framework</artifactId>
+        <!-- 使用的统一开发平台-框架版本 -->
+        <version>1.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>identify</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- 使用的统一开发平台-框架版本 -->
+        <framework.version>1.1.0-SNAPSHOT</framework.version>
+        <!-- 使用的统一开发平台-UC版本 -->
+        <uc.version>2.0.0-SNAPSHOT</uc.version>
+    </properties>
+    <modules>
+        <module>identify-api</module>
+        <module>identify-service</module>
+        <module>identify-view</module>
+        <module>identify-rest</module>
+        <module>expert-view</module>
+        <module>identify-rest-internet</module>
+    </modules>
+</project>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.ScoreRuleStandardMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.ScoreRuleStandard">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_SCORE_RULE_STANDARD
+        WHERE id = #{id}
+    </select>
+
+    <!--update by wangwj 20190121 start -->
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT R.SCORE_ITEM, S.ID, S.SCORE_STANDARD, S.SCORE_STANDARD_DETAIL,S.SCORE_VALUE
+        FROM T_IDENTIFY_SCORE_RULE R, T_IDENTIFY_SCORE_RULE_STANDARD S
+        WHERE R.DELETE_FLAG = 0
+        AND R.ID = S.IDENTIFY_SCORE_RULE_ID
+        AND R.SCORE_TYPE = #{scoreType}
+        ORDER BY R.SORT, S.SORT
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.ScoreRuleStandard">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_SCORE_RULE_STANDARD (
+            ID,
+            IDENTIFY_SCORE_RULE_ID,
+            SCORE_STANDARD,
+            SCORE_STANDARD_DETAIL,
+            SCORE_VALUE
+        )
+        VALUES (
+            #{id},
+            #{scoreRuleId},
+            #{scoreStandard},
+            #{scoreStandardDetail},
+            #{scoreValue}
+        )
+    </insert>
+
+    <!--update by wangwj 20190108 start-->
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.ScoreRuleStandard">
+        UPDATE T_IDENTIFY_SCORE_RULE_STANDARD
+        SET
+            SCORE_VALUE = #{scoreValue},
+            SCORE_STANDARD = #{scoreStandard},
+            SCORE_STANDARD_DETAIL = #{scoreStandardDetail}
+        WHERE id = #{id}
+    </update>
+    <!--update by wangwj 20190108 end-->
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_SCORE_RULE_STANDARD
+        WHERE id = #{id}
+    </delete>
+   <!--update by wangwj 20190121 end -->
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.OpinionFileMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.OpinionFile">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_review_OP_FILE
+        WHERE DELETE_FLAG = 0
+        AND id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_review_OP_FILE
+        WHERE DELETE_FLAG = 0
+    </select>
+    <select id="getOpinionFilesByOpinionId" resultType="String">
+        SELECT file_ID from T_IDENTIFY_review_OP_FILE where DELETE_FLAG=0 and OPINION_ID=#{opinionId}
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.OpinionFile">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_Review_OP_FILE (
+                ID,
+                SORT,
+                FILE_ID,
+                OPINION_ID
+        )
+        VALUES (
+            #{id},
+            #{sort},
+            #{fileId},
+            #{opinionId}
+        )
+
+    </insert>
+
+    <!-- add by panqh 2018-12-04 start-->
+    <insert id="insertOpinionFileList">
+        insert into T_IDENTIFY_review_OP_FILE(ID, OPINION_ID, FILE_ID, SORT)
+        SELECT A.* FROM (
+        <foreach collection="opinionFileList" item="item" index="index" open="" close="" separator="UNION ALL">
+            SELECT
+            SYS_GUID() ID,
+            #{item.opinionId} OPINION_ID,
+            #{item.fileId} FILE_ID,
+            #{item.sort} SORT
+            FROM DUAL
+        </foreach>
+        ) A
+    </insert>
+    <!-- add by panqh 2018-12-04 end-->
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.OpinionFile">
+        UPDATE T_IDENTIFY_review_OP_FILE
+        SET
+            ID = #{id},
+            SORT = #{sort},
+            FILE_ID = #{fileId},
+            OPINION_ID = #{opinionId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_review_OP_FILE
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

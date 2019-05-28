@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.HouseMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.House">
+        <id property="id" column="id"/>
+
+        <collection property="houseSplitList" column="id" ofType="com.thinvent.nj.identify.entity.HouseSplit"
+                    select="com.thinvent.nj.identify.mapper.HouseSplitMapper.getHouseSplitListByHouseId"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_HOUSE
+        WHERE id = #{id}
+    </select>
+
+
+    <select id="getHouseByMainId" parameterType="String" resultMap="map">
+        SELECT a.id,
+               a.MAIN_ID,
+               a.ADDRESS,
+               a.HILLOCK,
+               (SELECT Name
+                FROM T_BASE_DICT_ITEM
+                where VALUE = a.ZONE
+                  and GROUP_ID =
+                      (SELECT id from T_BASE_DICT_GROUP WHERE key = 'ZONE'))   AS ZONE,
+               (SELECT Name
+                FROM T_BASE_DICT_ITEM
+                where VALUE = a.STREET
+                  and GROUP_ID =
+                      (SELECT id from T_BASE_DICT_GROUP where key = 'STREET')) AS STREET
+        FROM T_IDENTIFY_HOUSE a
+        WHERE a.DELETE_FLAG = 0
+          AND MAIN_ID = #{mainId}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_HOUSE
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.House">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_HOUSE (
+        ID,
+        MAIN_ID,
+        ZONE,
+        STREET,
+        ADDRESS,
+        HILLOCK
+        )
+        VALUES (
+        #{id},
+        #{mainId},
+        #{zone},
+        #{street},
+        #{address},
+        #{hillock}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.House">
+        UPDATE T_IDENTIFY_HOUSE
+        SET
+            ID      = #{id},
+            MAIN_ID = #{mainId},
+            ZONE    = #{zone},
+            STREET  = #{street},
+            ADDRESS = #{address},
+            HILLOCK = #{hillock}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM T_IDENTIFY_HOUSE
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

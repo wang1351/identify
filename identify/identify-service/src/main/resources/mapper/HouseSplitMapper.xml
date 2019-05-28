@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.HouseSplitMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.HouseSplit">
+        <id property="id" column="id"/>
+        <collection property="houseSplitFileList" column="id"
+                    select="com.thinvent.nj.identify.mapper.HouseSplitFileMapper.getSplitFileListBySplitId"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_HOUSE_SPLIT
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_HOUSE_SPLIT
+    </select>
+
+    <select id="getHouseSplitListByHouseId" parameterType="String" resultMap="map">
+         SELECT
+          ID,
+          HOUSE_ID,
+          HOUSE_NAME,
+          STRUCTURE,
+          OTHER_CONTENT,
+          LAYER_ABOVE,
+          LAYER_UNDER,
+          BUILD_YEAR,
+          PURPOSE,
+          AREA,
+          IDENTIFY_AREA,
+          POSITION,
+          NATURE,
+          HOLDER_PERSON,
+          PERSON,
+          CONSTRUCT_ORG,
+          DESIGN_ORG,
+          PROSPECT_ORG,
+          SUPERVISION_ORG,
+          OTHER_CONTENT,
+          SORT,
+          (SELECT I.NAME
+           FROM T_BASE_DICT_ITEM I, T_BASE_DICT_GROUP G
+           WHERE I.GROUP_ID = G.ID AND G.KEY = 'HOUSE_STRUCTURE' AND I.VALUE = STRUCTURE) jg
+        FROM T_IDENTIFY_HOUSE_SPLIT
+        WHERE DELETE_FLAG = 0
+              AND HOUSE_ID = #{houseId}
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.HouseSplit">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_HOUSE_SPLIT (
+        ID,
+        HOUSE_ID,
+        HOUSE_NAME,
+        STRUCTURE,
+        OTHER_CONTENT,
+        LAYER_ABOVE,
+        LAYER_UNDER,
+        BUILD_YEAR,
+        PURPOSE,
+        AREA,
+        IDENTIFY_AREA,
+        POSITION,
+        NATURE,
+        HOLDER_PERSON,
+        PERSON,
+        CONSTRUCT_ORG,
+        DESIGN_ORG,
+        PROSPECT_ORG,
+        SUPERVISION_ORG,
+        SORT
+        )
+        VALUES (
+        #{id},
+        #{houseId},
+        #{houseName},
+        #{structure},
+        #{otherContent},
+        #{layerAbove},
+        #{layerUnder},
+        #{buildYear},
+        #{purpose},
+        #{area},
+        #{identifyArea},
+        #{position},
+        #{nature},
+        #{holderPerson},
+        #{person},
+        #{constructOrg},
+        #{designOrg},
+        #{prospectOrg},
+        #{supervisionOrg},
+        #{sort}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.HouseSplit">
+        UPDATE T_IDENTIFY_HOUSE_SPLIT
+        SET
+            ID            = #{id},
+            HOUSE_ID      = #{houseId},
+            HOUSE_NAME    = #{houseName},
+            STRUCTURE     = #{structure},
+            OTHER_CONTENT = #{otherContent},
+            LAYER_ABOVE   = #{layerAbove},
+            LAYER_UNDER   = #{layerUnder},
+            BUILD_YEAR    = #{buildYear},
+            PURPOSE       = #{purpose},
+            AREA          = #{area},
+            IDENTIFY_AREA = #{identifyArea},
+            POSITION      = #{position},
+            NATURE        = #{nature},
+            HOLDER_PERSON = #{holderPerson},
+            PERSON        = #{person},
+            CONSTRUCT_ORG = #{constructOrg},
+            DESIGN_ORG    = #{designOrg},
+            PROSPECT_ORG  = #{prospectOrg},
+            SUPERVISION_ORG = #{supervisionOrg},
+            SORT          = #{sort}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_HOUSE_SPLIT
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

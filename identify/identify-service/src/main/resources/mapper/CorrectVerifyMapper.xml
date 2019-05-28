@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.CorrectVerifyMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.CorrectVerify">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CORRECT_VERIFY
+        WHERE DELETE_FLAG = 0
+        AND id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CORRECT_VERIFY
+        WHERE DELETE_FLAG = 0
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.CorrectVerify">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_CORRECT_VERIFY (
+                ID,
+                CORRECT_ID,
+                CHECK_RESULT,
+                CHECK_OPINION,
+                DELETE_FLAG,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+            #{id},
+            #{correctId},
+            #{checkResult},
+            #{checkOpinion},
+            0,
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+
+
+   <select id="getCheckByCorrectId"  resultMap="map">
+       SELECT *  from T_IDENTIFY_CORRECT_VERIFY where DELETE_FLAG =0 and CORRECT_ID =#{correctId}
+   </select>
+
+</mapper>

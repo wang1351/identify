@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.NewProFileMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.NewProFile">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_NEW_PRO_FILE
+        WHERE id = #{id}
+    </select>
+
+    <select id="getNewProFileListByNewProjectId" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_NEW_PRO_FILE
+        WHERE DELETE_FLAG = 0
+        AND NEW_PROJECT_ID = #{newProjectId}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_NEW_PRO_FILE
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.NewProFile">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_NEW_PRO_FILE (
+            ID,
+            NEW_PROJECT_ID,
+            FILE_ID,
+            TYPE,
+            SORT
+        )
+        VALUES (
+            #{id},
+            #{newProjectId},
+            #{fileId},
+            #{type},
+            #{sort}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.NewProFile">
+        UPDATE T_IDENTIFY_NEW_PRO_FILE
+        SET
+            ID = #{id},
+            NEW_PROJECT_ID = #{newProjectId},
+            FILE_ID = #{fileId},
+            TYPE = #{type},
+            SORT = #{sort}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_NEW_PRO_FILE
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="insertNewProFileList">
+        insert into T_IDENTIFY_NEW_PRO_FILE(ID, NEW_PROJECT_ID, FILE_ID, TYPE, SORT)
+        SELECT A.* FROM (
+        <foreach collection="newProFileList" item="item" index="index" open="" close="" separator="UNION ALL">
+            SELECT
+                SYS_GUID() ID,
+                #{item.newProjectId} NEW_PROJECT_ID,
+                #{item.fileId} FILE_ID,
+                #{item.type} TYPE,
+                #{item.sort} SORT
+            FROM DUAL
+        </foreach>
+        ) A
+    </insert>
+
+</mapper>

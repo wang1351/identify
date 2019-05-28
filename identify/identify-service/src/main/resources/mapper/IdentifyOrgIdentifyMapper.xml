@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--add by wangwj 20190305 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyOrgIdentifyMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyOrgIdentify">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_IDENTIFY
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_IDENTIFY
+    </select>
+
+    <!--add by wangwj 20190306 start-->
+    <select id="getIdentifyOrgIdentifyListByMainId" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_IDENTIFY WHERE DELETE_FLAG=0 AND ORG_ID=#{mainId}
+    </select>
+    <!--add by wangwj 20190306 end-->
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgIdentify">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ORG_IDENTIFY (
+                ID,
+                ORG_ID,
+                NAME,
+                IDENTITY_NO,
+                SEQ,
+                EDUCATION,
+                JOB,
+                PRACTISE,
+                WORK_YEAR,
+                MAJOR
+        )
+        VALUES (
+            #{id},
+            #{orgId},
+            #{name},
+            #{identityNo},
+            #{seq},
+            #{education},
+            #{job},
+            #{practise},
+            #{workYear},
+            #{major}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgIdentify">
+        UPDATE T_IDENTIFY_ORG_IDENTIFY
+        SET
+            ID = #{id},
+            ORG_ID = #{orgId},
+            NAME = #{name},
+            IDENTITY_NO = #{identityNo},
+            SEQ = #{seq},
+            EDUCATION = #{education},
+            JOB = #{job},
+            PRACTISE = #{practise},
+            WORK_YEAR = #{workYear},
+            MAJOR = #{major}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ORG_IDENTIFY
+        WHERE id = #{id}
+    </delete>
+
+    <!--add by wangwj 20190320 start-->
+    <update id="deleteIdentifyOrgIdentifyList" parameterType="String">
+        UPDATE T_IDENTIFY_ORG_IDENTIFY
+        SET
+        DELETE_FLAG =1
+        WHERE ORG_ID =#{mainId}
+
+    </update>
+    <!--add by wangwj 20190320 end-->
+</mapper>
+        <!--add by wangwj 20190305 end -->

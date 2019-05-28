@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--add by wangwj 20190305 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyOrgResumeMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyOrgResume">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_RESUME
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_RESUME
+    </select>
+
+    <!--add by wangwj 20190306 start -->
+    <select id="getIdentifyOrgResumeListByPersonId" parameterType="String" resultMap="map">
+      SELECT *
+      FROM T_IDENTIFY_ORG_RESUME WHERE DELETE_FLAG =0 AND PERSON_ID=#{personId}
+    </select>
+    <!--add by wangwj 20190306 end -->
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgResume">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ORG_RESUME (
+                ID,
+                PERSON_ID,
+                SEQ,
+                WORK_WHERE,
+                WORK_WHEN
+        )
+        VALUES (
+            #{id},
+            #{personId},
+            #{seq},
+            #{workWhere},
+            #{workWhen}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgResume">
+        UPDATE T_IDENTIFY_ORG_RESUME
+        SET
+            ID = #{id},
+            PERSON_ID = #{personId},
+            SEQ = #{seq},
+            WORK_WHERE = #{workWhere},
+            WORK_WHEN = #{workWhen}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ORG_RESUME
+        WHERE id = #{id}
+    </delete>
+
+    <!--add by wangwj 20190320 start-->
+    <update id="deleteOrgResumeByPersonId" parameterType="string">
+      UPDATE T_IDENTIFY_ORG_RESUME
+      SET
+        DELETE_FLAG =1
+      WHERE PERSON_ID =#{personId}
+    </update>
+    <!--add by wangwj 20190320 end-->
+
+</mapper>
+        <!--add by wangwj 20190305 end -->

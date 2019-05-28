@@ -1,0 +1,12 @@
+
+
+#btTable  td{
+    text-align: center;
+    line-height: 25px;
+    vertical-align: middle !important;
+}
+
+#tbody   tr {
+    height: 25px;
+    vertical-align: middle !important;
+}

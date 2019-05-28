@@ -1,0 +1,33 @@
+#tbody  td {
+    text-align: center;
+    line-height: 55px;
+}
+#tbody  tr {
+    height: 55px;
+}
+td.td-nopadding {
+    padding: 4px!important;
+}
+
+#dphoto {
+    width: 100%!important;
+    height: 104%!important;
+    border: none!important;
+    padding: 0!important;
+    cursor: none!important;
+    margin-left: 0!important;
+    margin-right: 0!important;
+    display: flex;
+}
+
+#dphoto > img {
+    width: 80px!important;
+    height: 130px!important;
+    cursor: pointer;
+    flex-grow: 1!important;
+}
+
+.file-options,
+.file-name {
+    line-height: 18px;
+}

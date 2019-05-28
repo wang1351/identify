@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyVerifyMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyVerify">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_VERIFY
+        WHERE id = #{id}
+          AND DELETE_FLAG = 0
+    </select>
+
+    <select id="getIdentifyVerifyByReportId" parameterType="String" resultMap="map">
+        SELECT a.id,a.REPORT_ID,a.RESULT,b.OPERATOR_USER_NAME,b.OPERATOR_TIME
+        FROM T_IDENTIFY_VERIFY a
+                 LEFT JOIN T_IDENTIFY_RECORD b on a.ID = b.BUSINESS_KEY
+        WHERE a.DELETE_FLAG = 0
+          AND a.REPORT_ID = #{reportId}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_VERIFY
+        WHERE DELETE_FLAG = 0
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyVerify">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_VERIFY (
+        ID,
+        REPORT_ID,
+        REASON,
+        RESULT,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+        #{id},
+        #{reportId},
+        #{reason},
+        #{result},
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyVerify">
+        UPDATE T_IDENTIFY_VERIFY
+        SET
+            ID                 = #{id},
+            REPORT_ID          = #{reportId},
+            REASON             = #{reason},
+            RESULT             = #{result}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM T_IDENTIFY_VERIFY
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

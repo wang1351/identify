@@ -1,0 +1,22 @@
+
+#dubbo config
+dubbo:
+  applicationName: identify-service
+
+# mybatis
+mybatis:
+  mapperPackage: com.thinvent.nj.identify.mapper
+  entityPackage: com.thinvent.nj.identify.entity
+
+
+redis:
+  switch: 1
+
+#actuator management
+management:
+  context-path: /actuator
+  security:
+    enabled: false
+  health:
+    redis:
+      enabled: true

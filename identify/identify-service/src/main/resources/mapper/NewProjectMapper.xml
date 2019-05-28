@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.NewProjectMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.NewProject">
+        <id property="id" column="id"/>
+        <result property="prospectedOrg" column="PROSPECT_ORG" ></result>
+        <collection property="newProFileList" column="id" ofType="com.thinvent.nj.identify.entity.NewProFile"
+                    select="com.thinvent.nj.identify.mapper.NewProFileMapper.getNewProFileListByNewProjectId"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_NEW_PRO
+        WHERE id = #{id}
+    </select>
+
+    <select id="getNewProjectByMainId" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_NEW_PRO
+        WHERE  DELETE_FLAG = 0
+        AND MAIN_ID = #{mainId}
+    </select>
+
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_NEW_PRO
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.NewProject">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_NEW_PRO (
+                ID,
+                STOP_MODE,
+                PROJECT_NAME,
+                TOTAL_AREA,
+                BUILD_ORG,
+                LAYER_GROUND,
+                LAYER_UNDER_GROUND,
+                DESIGN_ORG,
+                CONSTRUCTION_ORG,
+                STRUCTURE,
+                SUPERVISION_ORG,
+                PROSPECT_ORG,
+                PURPOSE,
+                PILE_CONSTRUCTION_ORG,
+                PILE_MODEL,
+                PILE_DESIGN_ORG,
+                PILE_LENGTH,
+                PILE_START_DATE,
+                PILE_DIAMETER,
+                PILE_END_DATE,
+                SUPPORT_DESIGN_ORG,
+                SUPPORT_MODEL,
+                SUPPORT_CONSTRUCTION_ORG,
+                SUPPORT_LENGTH,
+                SUPPORT_START_DATE,
+                SUPPORT_DIAMETER,
+                SUPPORT_END_DATE,
+                SUP_STRUCTURE,
+                SPACING,
+                ROAD_SETTLEMENT,
+                PILE_DISPLACEMENT,
+                BUILDING_SETTLEMENT,
+                FOUNDATION_AREA,
+                DEPTH,
+                MARGIN,
+                WORK_DATE,
+                END_DATE,
+                DRAINAGE_MODE,
+                MAIN_ID
+        )
+        VALUES (
+            #{id},
+            #{stopMode},
+            #{projectName},
+            #{totalArea},
+            #{buildOrg},
+            #{layerGround},
+            #{layerUnderGround},
+            #{designOrg},
+            #{constructionOrg},
+            #{structure},
+            #{supervisionOrg},
+            #{prospectedOrg},
+            #{purpose},
+            #{pileConstructionOrg},
+            #{pileModel},
+            #{pileDesignOrg},
+            #{pileLength},
+            #{pileStartDate},
+            #{pileDiameter},
+            #{pileEndDate},
+            #{supportDesignOrg},
+            #{supportModel},
+            #{supportConstructionOrg},
+            #{supportLength},
+            #{supportStartDate},
+            #{supportDiameter},
+            #{supportEndDate},
+            #{supStructure},
+            #{spacing},
+            #{roadSettlement},
+            #{pileDisplacement},
+            #{buildingSettlement},
+            #{foundationArea},
+            #{depth},
+            #{margin},
+            #{workDate},
+            #{endDate},
+            #{drainageMode},
+            #{mainId}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.NewProject">
+        UPDATE T_IDENTIFY_NEW_PRO
+        SET
+            ID = #{id},
+            STOP_MODE = #{stopMode},
+            PROJECT_NAME = #{projectName},
+            TOTOAL_AREA = #{totoalArea},
+            BUILD_ORG = #{buildOrg},
+            LAYER_GROUND = #{layerGround},
+            LAYER_UNDER_GROUND = #{layerUnderGround},
+            DESIGN_ORG = #{designOrg},
+            OVERSEE_ORG = #{overseeOrg},
+            STRUCTURE = #{structure},
+            SUPERVISION_ORG = #{supervisionOrg},
+            PROSPECT_ORG = #{prospectedOrg},
+            PURPOSE = #{purpose},
+            PILE_CONSTRUCTION_ORG = #{pileConstructionOrg},
+            PILE_MODEL = #{pileModel},
+            PILE_DESIGN_ORG = #{pileDesignOrg},
+            PILE_LENGTH = #{pileLength},
+            PILE_START_DATE = #{pileStartDate},
+            PILE_DIAMETER = #{pileDiameter},
+            PILE_END_DATE = #{pileEndDate},
+            SUPPORT_DESIGN_ORG = #{supportDesignOrg},
+            SUPPORT_MODEL = #{supportModel},
+            SUPPORT_CONSTRUCTION_ORG = #{supportConstructionOrg},
+            SUPPORT_LENGTH = #{supportLength},
+            SUPPORT_START_DATE = #{supportStartDate},
+            SUPPORT_DIAMETER = #{supportDiameter},
+            SUPPORT_END_DATE = #{supportEndDate},
+            SUP_STRUCTURE = #{supStructure},
+            SPACING = #{spacing},
+            ROAD_SETTLEMENT = #{roadSettlement},
+            PILE_DISPLACEMENT = #{pileDisplacement},
+            BUILDING_SETTLEMENT = #{buildingSettlement},
+            FOUNDATION_AREA = #{foundationArea},
+            DEPTH = #{depth},
+            MARGIN = #{margin},
+            WORK_DATE = #{workDate},
+            END_DATE = #{endDate},
+            DRAINAGE_MODE = #{drainageMode},
+            MAIN_ID = #{mainId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_NEW_PRO
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyApplyMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyApply">
+        <id property="id" column="id"/>
+    </resultMap>
+
+
+    <select id="get" parameterType="String" resultMap="map">
+      SELECT a.*,b.VALUE typeValue,b.NAME typeName,c.NAME orgName from T_IDENTIFY_APPLY a
+      LEFT JOIN ZHFA.T_BASE_DICT_ITEM b ON a.IDENTIFY_TYPE = b.id
+      LEFT JOIN ZHFA.T_IDENTIFY_ORG_MAIN c ON a.IDENTIFY_ORG_ID=c.ID  where  a.ID=#{id}
+    </select>
+
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT * from T_IDENTIFY_APPLY where DELETE_FLAG = 0 and IDENTIFY_STATUE = 0
+        <if test="identifySource !=null and identifySource != ''">
+            AND IDENTIFY_SOURCE = #{identifySource}
+        </if>
+        <if test="createUsername !=null and createUsername != ''">
+            AND CREATE_USER_NAME LIKE '%'||#{createUsername}||'%'
+        </if>
+        <if test="identifyContactsTel !=null and identifyContactsTel != ''">
+            AND IDENTIFY_CONTACTS_TEL like '%'||#{identifyContactsTel}||'%'
+        </if>
+        <if test="startTimeSearch != null and startTimeSearch !=''">
+            AND CREATE_TIME >= TO_DATE(#{startTimeSearch},'yyyy-MM-dd HH24:mi:ss')
+        </if>
+        <if test="endTimeSearch != null and endTimeSearch !=''">
+            AND to_char(CREATE_TIME,'yyyy-MM-dd') &lt;= #{endTimeSearch}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyApply">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_APPLY (
+        ID,
+        IDENTIFY_CODE,
+        IDENTIFY_TYPE,
+        IDENTIFY_ORG_ID,
+        IDENTIFY_CLIENTETE,
+        IDENTIFY_HOUSE_ADDRESS,
+        IDENTIFY_CONTACTS,
+        IDENTIFY_CONTACTS_TEL,
+        IDENTIFY_OBJECTIVE,
+        IDENTIFY_SOURCE,
+        IDENTIFY_STATUE,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER,
+        OTHER_CONTENT
+        )
+        VALUES (
+        #{id},
+        #{identifyCode},
+        #{identifyType},
+        #{identifyOrgId},
+        #{identifyClientete},
+        #{identifyHouseAddress},
+        #{identifyContacts},
+        #{identifyContactsTel},
+        #{identifyObjective},
+        #{identifySource},
+        0,
+        sysdate,
+        #{createUsername},
+        #{createUser},
+        #{otherContent}
+        )
+
+    </insert>
+
+    <select id="getMaxCaseNo" parameterType="string" resultType="String">
+        SELECT
+        MAX(IDENTIFY_CODE)
+        FROM
+        T_IDENTIFY_APPLY
+        WHERE
+        DELETE_FLAG = 0
+        AND IDENTIFY_CODE LIKE '%'||#{formatterDate}||'%'
+    </select>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyApply">
+        UPDATE T_IDENTIFY_APPLY
+        SET
+        IDENTIFY_STATUE = #{identifyStatue}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- add by xujc 2018/12/26 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.CorrectUploadMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.CorrectUpload">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CORRECT_UPLOAD
+        WHERE DELETE_FLAG = 0
+        AND id = #{id}
+    </select>
+
+    <select id="getByCorrectId" parameterType="String" resultMap="map">
+         SELECT *
+        FROM T_IDENTIFY_CORRECT_UPLOAD
+        WHERE DELETE_FLAG = 0
+        AND  CORRECT_ID =#{correctId}
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.CorrectUpload">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_CORRECT_UPLOAD (
+                ID,
+                CORRECT_ID,
+                DESCRIPTION,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+            #{id},
+            #{correctId},
+            #{description},
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+</mapper>
+<!-- add by xujc 2018/12/26 end -->

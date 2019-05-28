@@ -1,0 +1,7 @@
+server:
+  context-path: /rest
+  port: 8100
+
+
+rest:
+  url: http://172.16.xxx.xxx:8090/rest

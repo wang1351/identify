@@ -1,0 +1,981 @@
+<!--add by yanyj 20190115 start-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>流程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="shortcut icon" href="http://127.0.0.1:8080/identify/img/favicon.ico" type="image/x-icon">
+    <title></title>
+
+    <!-- vendor components css -->
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/bootstrap/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/font-awesome/css/font-awesome.css"/>
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/animate/css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/ztree/metroStyle/metroStyle.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/pace/pace-theme-flash.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/js/vendor/layer/skin/layer.css" id="layui_layer_skinlayercss">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/uploader/webuploader.css">
+
+    <!-- plugins css -->
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/plugins/jquery-ui/jquery-ui-1.10.4.min.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/plugins/bootstrap/bootstrap-table.min.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/plugins/bootstrap/bootstrap-datetimepicker.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/js/plugins/bootstrap/select/css/bootstrap-select.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/js/plugins/bootstrap/bootstrap-switch.css">
+
+    <!-- custom css -->
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/main/core.css?v=1.0.1">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/skin/theme-default/main.css?v=1.0.1" id="theme-change">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/main/layout.css">
+
+    <link type="text/css" rel="stylesheet" href="http://127.0.0.1:8080/identify/css/main/common.css">
+    <link type="text/css" rel="stylesheet" href="http://127.0.0.1:8080/identify/css/modules/lc.css">
+
+</head>
+<body>
+<a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+
+<div id="header-topbar">
+    <nav id="topbar" class="navbar navbar-default navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span
+                    class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                    class="icon-bar"></span><span
+                    class="icon-bar"></span>
+            </button>
+            <a id="logo" href="/identify" class="navbar-brand">
+                <span class="logo-text">南京智慧房安管理服务平台</span>
+                <span class="logo-text-icon" style="display: none;"></span>
+            </a>
+        </div>
+        <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+            <ul class="nav navbar-nav horizontal-menu" id="first_menus_id">
+                <li id="796D45D40BF8507BE05010AC0C05557A" context="/identify" href="http://127.0.0.1:8080/identify" class="">
+                    <a><span class="nav-img"><img
+                            src="http://172.16.5.212/img/nav/nav_aqjd.png"></span><span
+                            class="nav-title">安全鉴定</span></a>
+                </li>
+                <li id="703CF09B52FE4738A42C31A6B41785C5" context="/uc" href="http://127.0.0.1:8080/uc" class="">
+                    <a><span class="nav-img"><img
+                            src="http://172.16.5.212/img/nav/nav_sy.png"></span><span
+                            class="nav-title">基础信息</span></a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar navbar-top-links navbar-right mbn">
+                <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i
+                        class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <p>You have 14 new notifications</p>
+                        </li>
+                        <li>
+                            <div class="dropdown-slimscroll">
+                                <ul>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-blue"><i
+                                            class="fa fa-comment"></i></span>New Comment<span
+                                            class="pull-right text-muted small">4 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-violet"><i
+                                            class="fa fa-twitter"></i></span>3 New Followers<span
+                                            class="pull-right text-muted small">12 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-pink"><i
+                                            class="fa fa-envelope"></i></span>Message Sent<span
+                                            class="pull-right text-muted small">15 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span
+                                            class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span
+                                            class="pull-right text-muted small">18 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-yellow"><i
+                                            class="fa fa-upload"></i></span>Server Rebooted<span
+                                            class="pull-right text-muted small">19 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span
+                                            class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span
+                                            class="pull-right text-muted small">2 days ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-pink"><i
+                                            class="fa fa-envelope"></i></span>Message Sent<span
+                                            class="pull-right text-muted small">5 days ago</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="last"><a href="extra-user-list.html" class="text-right">See all alerts</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown topbar-user">
+                    <a data-hover="dropdown" href="#" class="dropdown-toggle no-link"><i
+                            class="fa fa-user"></i>&nbsp;朱博文&nbsp;<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user pull-right">
+                        <li><a href="#" data-hover="tooltip" title="修改密码" data-toggle="modal"
+                               data-target="#change-password"><i class="fa fa-key"></i>修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/identify/logout"><i class="fa fa-sign-out"></i>退出</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown hidden-xs">
+                    <a id="theme-setting" href="javascript:void(0);" data-hover="dropdown"
+                       data-step="1"
+                       data-intro="&lt;b&gt;Header&lt;/b&gt;, &lt;b&gt;sidebar&lt;/b&gt;, &lt;b&gt;border style&lt;/b&gt; and &lt;b&gt;color&lt;/b&gt;, all of them can change for you to create the best"
+                       data-position="left" class="dropdown-toggle"><i class="fa fa-cogs"></i></a>
+                    <ul class="dropdown-menu dropdown-theme-setting pull-right">
+                        <li>
+                            <h4 class="mtn">主题</h4>
+                            <select id="list_theme" class="form-control">
+                                <option value="default">默认主题</option>
+                                <option value="a">主题A</option>
+                                <option value="b">主题B</option>
+                                <option value="c">主题C</option>
+                                <option value="d">主题D</option>
+                                <option value="e">主题E</option>
+                                <option value="f">主题F</option>
+                                <option value="g">主题G</option>
+                                <option value="h">主题H</option>
+                                <option value="i">主题I</option>
+                            </select>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="change-password" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" class="close">&times;</button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm" method="post"
+                          action="/identify/sys/users/7B50C6964F3CCD35E05010AC0C053C1E/changePwd"
+                          class="form">
+                        <div class="form-group">
+                            <div class="input-icon right">
+                                <span style="float: left; padding: 6px">原密码</span>
+                                <i class="fa fa-key"></i>
+                                <input type="password" id="password" value="" name="password" class="form-control"
+                                       datatype="*6-16"
+                                       nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" style="float: right;width: 87%"/>
+                                <label class="Validform_checktip"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-icon right">
+                                <span style="float: left; padding: 6px">新密码</span>
+                                <i class="fa fa-key"></i>
+                                <input type="password" id="newPassword" value="" name="newPassword" class="form-control"
+                                       datatype="*6-16"
+                                       nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" style="float: right;width: 87%"/>
+                                <label class="Validform_checktip"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon right">
+                                <span style="float: left; padding: 6px">确认密码</span>
+                                <i class="fa fa-key"></i>
+                                <input type="password" id="newPassword2" value="" name="newPassword2" class="form-control"
+                                       datatype="*6-16"
+                                       nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" style="float: right;width: 87%"/>
+                                <label class="Validform_checktip"></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" id="closePwd">关闭</button>
+                    <button type="button" class="btn btn-primary" id="changePwd">修改密码</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wrapper">
+    <nav id="sidebar" class="navbar-default navbar-static-side">
+        <div class="sidebar-collapse menu-scroll">
+            <ul id="side-menu" class="nav">
+                <li class="user-panel" style="display:none;">
+                    <div class="thumb"><img src="/identify/" alt="" class="img-circle" />
+                    </div>
+                    <div class="info">
+                        <p>欢迎：</p>
+                        <p><span>朱博文</span> | <a href="/identify/logout" class="sys-logout" data-hover="tooltip" title="退出">退出</a></p>
+
+                        <ul class="list-inline list-unstyled" style="display:none;">
+                            <li><a href="#" data-hover="tooltip" title="个人信息"><i class="fa fa-user"></i></a></li>
+                            <li><a href="/sys/user/7B50C6964F3CCD35E05010AC0C053C1E/avatar" data-hover="tooltip" title="修改头像"><i class="fa fa-camera-retro"></i></a></li>
+                            <li><a href="#" data-hover="tooltip" title="修改密码" data-toggle="modal" data-target="#change-password"><i class="fa fa-key"></i></a></li>
+                            <li><a href="/identify/logout" data-hover="tooltip" title="退出">退出</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+                <!--add(update) by yanyj 20180926 start-->
+                <li name="796D45D40BF8507BE05010AC0C05557A" id = "url_796D45D40BF9507BE05010AC0C05557A" class="menu_hide">
+
+                    <a href="#" ><i class="fa "></i>
+                        <span class="submenu-title">鉴定业务管理</span><span class="fa arrow arrow-span"></span></a>
+                    <ul class="nav nav-second-level collapse ">
+                        <li name="796D45D40BF9507BE05010AC0C05557A" id = "url_796EC99EB74DBBC2E05010AC0C055732" >
+
+                            <a _href="http://127.0.0.1:8080/identify/tasks" ><i class="fa "></i>
+                                <span class="submenu-title">我的待办任务</span></a>
+                        </li>
+                        <li name="796D45D40BF9507BE05010AC0C05557A" id = "url_796EC99EB74EBBC2E05010AC0C055732" >
+
+                            <a _href="http://127.0.0.1:8080/identify/identifies" ><i class="fa "></i>
+                                <span class="submenu-title">鉴定业务列表</span></a>
+                        </li>
+                        <li name="796D45D40BF9507BE05010AC0C05557A" id = "url_7C3DCCD5EEC5099FE05010AC0C056538" >
+
+                            <a _href="http://127.0.0.1:8080/identify/correctMain" ><i class="fa "></i>
+                                <span class="submenu-title">补正变更列表</span></a>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <li name="703CF09B52FE4738A42C31A6B41785C5" id = "url_29A43DB0286E452786C2A072D70C8189" class="menu_hide">
+
+                    <a href="#" ><i class="fa "></i>
+                        <span class="submenu-title">系统管理</span><span class="fa arrow arrow-span"></span></a>
+                    <ul class="nav nav-second-level collapse ">
+                        <li name="29A43DB0286E452786C2A072D70C8189" id = "url_9D257F7814F1478093357C90161D76CB" >
+
+                            <a _href="http://127.0.0.1:8080/uc/sys/orgs" ><i class="fa "></i>
+                                <span class="submenu-title">机构管理</span></a>
+                        </li>
+                        <li name="29A43DB0286E452786C2A072D70C8189" id = "url_DEE9E8FCD63849CBBCED930E1462F736" >
+
+                            <a _href="http://127.0.0.1:8080/uc/sys/users" ><i class="fa "></i>
+                                <span class="submenu-title">用户管理</span></a>
+                        </li>
+                        <li name="29A43DB0286E452786C2A072D70C8189" id = "url_FD1449D85C784834AF63F4D85698884C" >
+
+                            <a _href="http://127.0.0.1:8080/uc/sys/resources" ><i class="fa "></i>
+                                <span class="submenu-title">资源管理</span></a>
+                        </li>
+                        <li name="29A43DB0286E452786C2A072D70C8189" id = "url_421A4A5D43574E16BF69019D4A5A9FE9" >
+
+                            <a _href="http://127.0.0.1:8080/uc/sys/roles" ><i class="fa "></i>
+                                <span class="submenu-title">角色管理</span></a>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <!--add(update) by yanyj 20180926 end-->
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper">
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <div class="page-header pull-left">
+                <div class="page-title">鉴定业务详细</div>
+            </div>
+            <ol class="breadcrumb page-breadcrumb" menuIds="">
+                <li class="header">当前位置：</li>
+                <li><a href="#">鉴定业务列表</a></li>
+                <li><a href="#">鉴定业务详细</a></li>
+            </ol>
+            <div class="clearfix"></div>
+        </div>
+        <div class="page-content" id="pageContent">
+            <div class="portlet box">
+                <div class="portlet-header">
+                    <ul class="nav nav-tabs nav-top-lc">
+                        <li role="presentation" class="active"><a href="javascript:;">鉴定委托</a></li>
+                        <li role="presentation"><a href="javascript:;">复审</a></li>
+                        <li role="presentation"><a href="javascript:;">补正变更</a></li>
+                    </ul>
+                    <!--
+                    <div class="process">
+                        <ul>
+                            <li class="before"><a href="#">
+                                <span class="process_num">1</span>
+                                <span class="process_tit">鉴定委托</span>
+                            </a></li>
+                            <li class="active"><a href="#">
+                                <span class="process_num">2</span>
+                                <span class="process_tit">复审</span>
+                            </a></li>
+                            <li><a href="#">
+                                <span class="process_num">3</span>
+                                <span class="process_tit">补正变更</span>
+                            </a></li>
+                        </ul>
+                    </div>
+                     -->
+                </div>
+                <div class="portlet-body">
+                    <div class="lc_content">
+                        <!-- 流程左侧列表 -->
+                        <div class="lc_side">
+                            <div class="lc_side_inner">
+                                <ul>
+                                    <li class="open"><a href="#div1" rel="nofollow" target="_blank">
+                                        <span class="lc_title">发放鉴定报告</span>
+                                        <em class="lc_time">2019-01-04 10:01</em>
+                                    </a></li>
+                                    <li><a href="#div2">
+                                        <span class="lc_title">签发鉴定报告信息</span>
+                                        <em class="lc_time">2019-01-04 10:01</em>
+                                    </a></li>
+                                    <li><a href="#div3">
+                                        <span class="lc_title">审核报告</span>
+                                        <em class="lc_time">2019-01-04 10:01</em>
+                                    </a></li>
+                                    <li><a href="#div4">
+                                        <span class="lc_title">鉴定报告</span>
+                                        <em class="lc_time">2019-01-04 14:14</em>
+                                    </a></li>
+                                    <li><a href="#div5">
+                                        <span class="lc_title">签订合同</span>
+                                        <em class="lc_time">2019-01-04 09:49</em>
+                                    </a></li>
+                                    <li><a href="#div6">
+                                        <span class="lc_title">出具方案</span>
+                                        <em class="lc_time">2019-01-04 09:48</em>
+                                    </a></li>
+                                    <li><a href="#div7">
+                                        <span class="lc_title">初勘</span>
+                                        <em class="lc_time">2019-01-04 09:47</em>
+                                    </a></li>
+                                    <li><a href="#div8">
+                                        <span class="lc_title">受理</span>
+                                        <em class="lc_time">2019-01-04 09:46</em>
+                                    </a></li>
+                                    <li><a href="#div9">
+                                        <span class="lc_title">鉴定申请</span>
+                                        <em class="lc_time">2019-01-04 09:44</em>
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 流程内容 -->
+                        <div class="lc_main">
+                            <div id="div1" name="div1">
+                                <div class="title"><span>发放鉴定报告</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <th>经办人</th>
+                                        <td>朱博文</td>
+                                        <th>操作时间</th>
+                                        <td>2019-01-04 10:01:57</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="div2" name="div2" style="display: none;">
+                                <div class="title"><span>签发鉴定报告信息</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <th>经办人</th>
+                                        <td>朱博文</td>
+                                        <th>操作时间</th>
+                                        <td colspan="3">2019-01-04 10:01:43</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="div3" name="div3" style="display: none;">
+                                <div class="title"><span>审核报告</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <th>经办人</th>
+                                        <td>朱博文</td>
+                                        <th>操作时间</th>
+                                        <td>2019-01-04 10:01:19</td>
+                                    </tr>
+                                    <tr>
+                                        <th>专家审核意见</th>
+                                        <td colspan="3">2019-01-14</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="div4" name="div4" style="display: none;">
+                                <div class="title"><span>鉴定报告</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>房屋名称</th>
+                                            <th>鉴定等级</th>
+                                            <th>鉴定结论</th>
+                                            <th>处理意见</th>
+                                            <th>鉴定报告</th>
+                                            <th>检测报告</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>玄花园1号1栋</td>
+                                            <td>C</td>
+                                            <td>一般危房</td>
+                                            <td>建议治理</td>
+                                            <td><div name="identifyFileId_0" class="uploader">
+                                                <div class="uploader-list">
+                                                    <div class="file-card">
+                                                        <div class="file-name">jgjd2017-0335江心洲花元村66号.docx</div>
+                                                        <div class="file-img">
+                                                            <img class="file-uploader-file" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAaZUlEQVR4Xu2dd3hUVfrHv2eS0KUjCIpKSyhKUWQRLOhDW8oKSViKFKlJQED9geCqi4oKiKKUJAiiIAssydCRBVQEWZEqRchQRIoiTWooIcmc3/NOiBthbpmbm5m5d97zPJA/5j3nvOd7388t557zXgEurAAroKiAYG1YAVZAWQEGhKODFVBRgAHh8GAFGBCOAVbAmAJ8BTGmG9cKEQUYkBA50DxMYwowIMZ041ohogADEiIHmodpTAEGxJhuXCtEFGBAQuRA8zCNKcCAGNONa4WIArYCpG7szLKZ7huPO4RoLoAGEjI8RI5jMA2zCCDKCkgh3WLndXeRAUeWPHchmBz0xRdbABIZndTFAYySQAMhYIsx+XIQg9lWQtxwSEejfc6Be4PZTyXfLB1MNWInV4hwRzgh8JgVxbeVzxKA8Px327Ak5HUItHGlJKy32pgtC0jtTkn1ECbXAqKS1US3o7/e0cgzUimzAAxPcyZMs9L4LQlI3dhplbLdjq1C4G4riW1nXzUBuTl4KeVElzNhhFW0sCQgtaOT/g2BLlYRORT81AsIaSElZricp+KAMe5g18ZygNSOTq4phdslIBzBLm4o+ecLIDchWX3phqPzieWDrgazTpYDJComcbKAeF5JVClxGQIrpRsHhQNBf4YK5uDwxTcpRX2HkM/4VkfuzsiMaPXzsgGnfKnnT1uLASJFVHTySSFwpzeRJOT+zEzZ8qelg4/7U0TuC6gVk9wrDHK2r1pIyBNZwtHyUErcPl/r+sPeUoB4pnVlxGklYdxu91P7Fw1e5w/huI8/K2AUkJxWZLrbLTsG47GzFCA5U7vY4/XqIXHZ5YwvyYEbGAXyBwgggWwB0TctNW5OYEbgvVdLARLZOamZw4GN3gGRu13OhPrBJG4o+aIGiIR0C4gzACpqaSLdeMe1KP4fWnb++p0B8ZfSNu9H9QoiZVa2Q9wXJrEGQB0tKSTkojBRvtvelC43tGwL+ncGpKAVDpH2tQBJcyZE1I2dViLbLZYJIVpoyiLl5ivX0fbYyoTzmrYFaMCAFKC4odS0HkA8esQuDIuSZ2cJiF5a+kgpD7uBlgecCYe1bAvqdwakoJQNsXZ1A3JTl6iYxNEC4h1tmeT5LBnW9qBz0GZtW/MtGBDzNQ3JFn0FhESKipnWWcAxH0AhDdFuSLi7uVIHL/K3uAyIvxW3aX9GACEpakZPbxIuslcBooyaNFJCCiFHp6UmjPenhAyIP9W2cV9GASFJakUnVnMAa4UQ1bQkkpBzXKJ8X6R0ydayNeN3BsQMFbkN9aUmUmbRLJaaTFXbJZYpXgSrIEQTLTmllOvCHLLj3pTB6Vq2+f2dAcmvglzfo0B+riC5EtaNXVgoW56dLyA665B1X7ZAqwMp8b/qsDVswoAYlo4r5lXADEBy2vMsSH1HCIzSofApt5St9jsTduuwNWTCgBiSjSvdqoB5gOS0XDsmuZeEnCWAMFW1Ja5KoLPLGb+6II4KA1IQqoZgm2YDQhJGdp7WwuEQywBRQk1SWusFKeJczvgZZkvPgJitaIi2VxCAkJQ1YpPrhEv3WgFRWUtaCbzvSo0bcTO9ipa5rt8ZEF0ysZGWAgUFCPV7f8cZFQtHZK4RQjyo5YcEVlw/WyT2yDfPXdey1fM7A6JHJbbRVKAgAaHOK3eYXqxkIfciIdBayxkJud2dEdbmwPJBZ7VstX5nQLQU4t91KVDQgOQ4McYRFV0xWQgM0OHUMZkd1tK1eOABHbaKJgxIftTjun8o4B9AcrqLikl6CRLvaaWZlcBFt3C3P5Ay2OsmOz2HjwHRoxLbaCrgT0BuQtIeQIoAimg4lwmgV1pq/ALNQXgxYECMqMZ1blNAa0+6G9L0DO8CoqgACus6HFIuSnMmROuyzWPEgPiqGNt7VUALkKCQTcq9ac6Eer74woD4ohbbKipgCUAAuCX67XfGz9J7KBkQvUqxnaoCkV0Sn3W4xedBL5MUX6Q549rp9ZMB0asU26kD0vHDSEehwq6gl0niyzRnfEu9fjIgepViO00FomISLwqIoE3eRwm2IeQHrpSElzQHc9OAAdGrFNtpKlAzJql9GLBEcwWuZksFYOChgxbTY4wrNf4NvT0wIHqVYjtdCtToPOPucGSOhEPUhdZSdV0tGjCSqI48H1eiIM/9PIMEA2JAUa5iJwVqxyROAsRwb2NiQOx0pHkshhRgQLzIJiUnrzYUTTasxIAwIDYMa/OGxIAwIOZFkw1bYkAYEBuGtXlDYkAYEPOiyYYtMSAMiA3D2rwhMSAMiHnRZMOWGBAGxIZhbd6QGBAGxLxosmFLDAgDYsOwNm9IDAgDYl402bAlBoQBsWFYmzckBoQBMS+abNgSA8KA2DCszRsSA8KAmBdNNmyJAWFAbBjW5g2JAWFAzIsmG7bEgDAgNgxr84bEgDAg5kWTDVtiQBgQG4a1eUNiQBgQ86LJhi0xIAyIDcPavCExIAyIedFkw5YYEAbEhmFt3pAYEAbEvGiyYUsMCANiw7A2b0gMCANiXjTZsCUGhAGxYVibNyQGhAExL5ps2BIDwoDYMKzNGxIDwoCYF002bIkBYUBsGNbmDYkBYUDMiyYbtsSAMCA2DGvzhsSAMCDmRZMNW2JAGBAbhrV5Q2JAGBDzosmGLTEgDIgNw9q8ITEgDIh50WTDloICkOqdku4MF6gpHIjwm8YS9YTAFG/9SSkPQ4h+fvPFTh0JKbMyw345tOS3n4ExbqsPLaCAVGw1p3iZkunzBERHqwvJ/v9ZAQn5c3a2bHdw8eA0K2sTUECiopP+IwRaW1lA9l1NAXk+U2RFHkoZesaqOgUMkKiYpCcFsM6qwrHf+hSQEpNdzvhh+qyDzypwgEQnjRIC7wafJOyRyQpsSUuNb2Jym35rLmCA1I5JGg9gpN9Gyh0FRAEp5QGXMyEyIJ2b0CkDYoKI3ISyAgzI/7QRvgQKX0F8Ucu6tgwIA2Ld6PWD5wwIA+KHMLNuFwwIA6IZvUIAFcsWR6VyJXDtRhYupWfg0pUMXLmWqVnXnwaFI8JQpWJJlCtZ1NPtT7+cx7lL1/LlAgNSQID0f6YhChcK0zw4UgIZN7Jw+eoNz7/0qxk4fuoSjpy4qFm3oAxKlSiMxxtWRYvG96FW1XK4p2JJRIQ7buvuwuXr2PDDMazfcQwbdhz1OzDVqpTGkw/di2YNquL+yqU9EBPMuYW03Xv4DL7eegRfbf0ZB4+d81kyBqSAANk8uy/uKFbI5wOSW+Hk71fw/Z5f8N9dx7Fu2xFcvZ5luC29FQmKfs80wENRd8Hh8GnOAhk3svHp8p1Idu7AjcxsvV36bBfmEOjSsg6e69gAd995h0/1D/96AR8v3oFl6w/orseABCkgeY9g+rUbWLhmH+as3IPT56/oPrh6DZvUq4KXnv0L6lWvoLeKoh2BPfaTbz1nbbPLYw2rYnSfR3Ff5dL5anrzj7/ihQ/Wgq6AWoUBsQAguS5mZ7uxYM0+vPf5JtPO0l1b18Vr/R77062JVtDo+T0xZRumLtymx1TThq4ab8Y9gU4tojRt9Rr8fvEaXk9e77k6qxUGxEKA5Lp66Pg5vDjpS9Bfo4Xu1Uf0bIo+HeobbUKz3opvD2L01K+R7ZaatkoGJYsXxpSRrdG4TmXDbShVpGeUFz5YgzXfH1ZsmwGxICDkMt3nJ4xbhe92/2IocAZFN8Kwro8YqutLpdkrdmP87O98qfKHbfGiEUgZF53vWyqlzi+mZ6DziBT8djadAdFxhHx6KtV6k672kJ6Z5cbOAyc9LoU5HChXuigqlC6OYkXCdbj5PxOa9YoZmeqZ9fKl1KpaFqkTYhAedvvMlLd2dh44hSMnLnief2gKtepdpXQ/yNNZuseri0Ft+FqmjGyDpxvfp6saTTlv23cCv/2eDtK3Qa2KqFOtAuj2zFtxuyX6jFmGbWm/qbbPV5AAXEFobr55v9m3HRiapnywZkU0b3APnnky0uvU6q2Vfj5xAdEjUnH9hr5ZLpquXTyxC2iKVK1QAC1YsxefLd+FX05fvs20fOmi6N7mAfTtWB+FItSns0+cTUeH4QtwLUOfj9QZzVSNGfi4Jhw0HZ6Yug1rNx/2zKTlLTRdTTo+2/YBVLllxmvi55swa9kuzfYZkCACJO/RKl+6GF7s0cRzgLXKJ0t34v2532uZeX7v3qYeXu3XXNWWgBgyfhUO6HhvULnCHZgyojVq319etU16YKcHdz2Fxr52Wg/V90j0XPPenE2Yu2oPCGa1QieFgZ0bYWCnRp6TDsE0bOIaPa6AAQlSQHLdatO0Ot4Z0gJFCinfftGZs0Xc57qmLVdP7e558adUaHan2yuLvF41lOrQmXr+251xX+VSiu2evXANLQbN0fXA/lr/x9CtdV3FtgiOF95fgy+3/KwryHON6lQrj1F9mmHg2JW6r7gMSJADQu61b14TE4Y9rRoMs5buxESNqwi9dU4c1Va1neffW42vfAw8apDu91PHR6u2/cq0dVjyzX5VmwpliuHLxGdVby+TndsxecFWn+AwasyAWAAQcvGdwS1Ub7foTXuT3p+onqGTR/8Vjzeqqhgruw6e9lw9jJbxQ59Gh8dqKlbfc+g0/j5avf0RvZriOZWpZ7r9azdsvudB3B+FAbEIIDXuKYtlH3RRjYmery/FdoVZmbAwB7Z/3k/1gXrIhP/k6w04PYc4J8Qo+uiWEk16z1Jds7U2sQeqVFBeQjJqytdYtkH/UpH8QsSAWAQQcvNfY59Bw8hKisd8yr+3Iil1u9ffH6hxJ/79bmfFupevZKBZv9nIys7fmXn5pL+j+t1lFPuJe/cLbNhxzOvvd5Uvga+SnlWsS+8tnhg4x7RVBHrgYUAsBEi/vzXwrJlSKt/v+RV931zu9Wd6Yz6yV1PFunRWprNzfsvQro8gLrqRYjMzFv+ASfM2e/29U4tIvJ3QQrEuTTu/OePb/LroU30GxEKANIqqhLlvPaN4gOllWeNen3j9fdKLrdC6aTXFuuM++w5zVu72KXi8GbdsUg0f/V8rxXa27juB3v9c5vX3cUOeQscnainWHTX1a59W4uZ7MABP8+YR0W9v0pVeFGodUHrz/cO8AYpvh6l+vS7TQff6t5a5b/0NjaLuUuziuTeWg1a55rfcU6kkVk/prtgMLTlvP3yB199pFoxmw5RKu2ELQC9G/Vn4CmKhKwi5unFmb5QtlbNjzltp3n82zl28fRfdikl/RzWVZ4O/DlvgWU6S30K7+ghipaJ2cvg6uScqlSuuWLdul2R4YT+/LqvWZ0AsBsiKD7uqLhOhszOdpW8t387sjXIqYD3WfzboJaEZ5ceFg+DIu7UvT6MU4BTo3sruBQMV14ddvZ6Jh3t6v300w2elNhgQiwEy7+1OnoV4SqXHq0vww/6chZB5y96Fcap7Phr1mKn77bJWQP53Vh+UuaOIohlN9dJCy7yFVu5unaOckP7k7+l4Km6uVtem/86AWAyQ+e90Rv2adyoGQs/XlmK76/YVqlqANOg+w7Tp042f9EbZm4kTvDn6SO9ZSL8FELq1olsspUIrllsPmWc6AFoNMiAWA2TlR109CQqUSscXF3rdSLVhRi/QIkClovTsohVA3n6nZxB6FvFWlG6xShQthC1z+ip2d/7ydTTr+5kRd/JVhwGxGCBazxKPD5iDsxeu3hYU9Bae3sYrldbPz8Pxk77tK/HWFj170DOIUqHnHHre8VZ2zR+ouAaLZuZohs7fhQGxECA0zbvjX/1VNzrVifX+ADz7jY6q21b7vbUCmwzuTswbtLSi94uPuinGMW0Tpquct7Juek9P6h7Fq1y/2fnOc+UrYAyIhQDRWi6i9qLw/Rdaou2j1RXjY8KcTZ7NUfkt9DKSXkoqFXrXQu9cvBVax6W2r6T/2BX4bpexLcZGx8WAWAgQ2iNBeyWUypa9JzzbSL0VraUmlGBh5OSvjMbRH/WGd3vEszlJqVBeqg/nbfH684ShT6O9ymrgD/61GTOX/JBvH31pgAGxECBTX26Dpx5W3qM9beE2TFPYtUc5rxaOU96vQalE6SE4PxlISEqtxYoD3/4CG3d6X6yotRaLpq9pGtufhQGxCCC0p3rN1B6q7zJ6/XMptu3znoSA3tttmd0P9L5BqcSPW4X1248ajj9KBrHkfeUl+TSD1bjXTMUskTQ1TFPEasXfy00YEIsAMjbhSXRWSZxGSRsa91TfMJU0qi2eeOhexfijzCPd/7HYMCBat0i7D51GV40NU1rT2M6v0vBa8nrDPvpakQGxACBaK2RpCLQSl1bkqpUnGt2LpNHqW26NbpqqWbUslqpcPcgvPVtu46IfwtCujRWHQVchymW1/+jvvsa6IXsGJMgBafpAFUx9uS2KFvZP0gZKrkB5rHzJtUVJG1LGx6gmk6b3H08O1E7aUKxIBNZ/3Ev1VpCmimn3JG2g8rXQJADl+H1Z54QEAxLEgMQ8XRv/HPi46vJ2vVeP3GF2bVUXrw9Qngkju19PX0afN5Z5/moVyo81/ZV2mml/KMkCJVvQUyjdEX0+Qq3QFYSmi/UkoKZ26B1SQuzDf2zm0pv4gQEJMkBKFi/kOcPRwVRbUpLrNp3po0em3ra2SSm49CaOo3cqb8zYgJUbDyouMX+s4T14d8hTquuuyA9K7UmrjPUmjqOH9VVTuml+PoKuSi9NWgua3lYrtE2Zkl/fuhWY8gYv1fgUAgMSAEAoUGYt2+npmVKP0lm4QuliuL9KGVStpJyz6tYgoCXgMS+n+vyxHV9Sj54+dwWLv9mPo79dxKlzV1C+VE7qUbpVubeSch6sXF/pmaH7PxaBMqb4UujWcsar7XV9p4QWZy7+ej+On85ZKlO0UDjuLFvco2WbR2so3vrRlPbAsSuwaY/yRjEGJACA+BIoSra0Nmn4RN+Tp+W2N6BTQ7zQvYkZrqi28enyXZ4MiEaK1h58I23eWudaRiY6vLAQJ854v51kQCwICGUgGTpxTb62yNKiwpd7N0XPdg+aEWde21i/4yiGTFgN+q6J0UIQE8wFVRas3os3ZyongmBALAYI7ckeMHal4hnP10AqqA/oUFpQ+opTfuDIHQt9OIeeIZQytfs65lz7jxftwIfzvS97+d8tojzgciZoJ0g26kQB16sdkzgJEMO9dSOBMa7U+Df0uuC3pA16Hcprd/TkRXy2bBcWrXOZnlWQ7vfHDHpCNWevXp8pkfTcVT9iwpzvNJNK622T7B6pW9mTXZKSZee3nL90HeM++y+Wf3tQsym+ggTxFYTWR1GuK/oC0qrvDhVowgKa3erdvj7iYxqhaGHl5ShqEbXDdRJjPt6Qry9fqbVPn1no074+BkU3NOQjPZTPX/0jPpq/RfcXeRmQAgKElnUUU1n3lDcQsrLcoA91XrpCn4G+gTPnr3imLukTxv7O4kFf5m3zaHVPHmC1LI65/tNHO+lZgxJeb9x5XPOMbIYBzfr9tVlNzyegH65zl+aHgI6dvIQl37g8ibPJX18KA1JAgPhyEILVlj6zTKmCShUvjJIlCoO2xdLU8sUrGbiUnoFfz1w29O1xM8dLiy9pn0zpEkU8PtLfzKxsz1t2ugJTsocffzpjuEsGhAExHDyhUJEBYUBCIc4Nj5EBYUAMB08oVGRAGJBQiHPDY2RAGBDDwRMKFRkQw4AkvgWIV0MhSEJ5jBLY40qNL7j1OAUsbsDepEdFJ3cTQvo/F2YBC8rN/1kBCfmpKzVBOeVjkAsWMEBqxE6uEC7DDwkI/evTg1xMdu8WBaTMko6wRq6UQXusqk3AACHBoqKTOwDuFCFEYasKyH57V0BCXpNuR6/9i+JSraxRQAEh4WrGTmsQ7nYMBGRNKWBsEZOBIyCBUgJooFA1HYC+/a0G+rZ1FQk3pNgkhPgszRmnvZoxyMUIOCCB0ieyc1IzhwMbvfUvpdztcibUD5Rv3G/wKMCAeDkWDEjwBGigPWFAGJBAx2BQ98+AMCBBHaCBdo4BYUACHYNB3T8DwoAEdYAG2jkGhAEJdAwGdf8MCAMS1AEaaOcYEAYk0DEY1P0zIAxIUAdooJ1jQBiQQMdgUPfPgDAgQR2ggXaOAWFAAh2DQd0/A8KABHWABto5BoQBCXQMBnX/DAgDEtQBGmjnGBAGJNAxGNT9MyAMSFAHaKCdY0AYkEDHYFD3z4AwIEEdoIF2jgFhQAIdg0HdPwPCgAR1gAbaOQaEAQl0DAZ1/yELSM3o6U3Chft7b0dHSrhczvjaQX3k2Dm/KBAVnThVCDHYe2fytbTUhLF6HfHpK7d6Gy0ou1rRidXChPhJof0baamnigJjjH+gvKAc53b9qkDtmKQvATzt/UQqB7mcCR/rdchSgNwd+0HREu6iV4SAV78l5Cuu1IR39Q6e7eynwM2TqAvwnvFTAh1cqfEr9I7cUoDQoGpHJ26CEH9RuM2SQuA9h4gYvzel/zm9IrCdPRSIjE2MFFKkCOABr/EBXA8T7gp7UwZTmlpdxXKAREYnjnAIMUF1dJShHNgCgUxdKrCR5RUQQBUpRXWluwsaoJRynsuZ0MOXwVoOkBptJ5eMKB5+BBBlfBko27ICmULUPZQSt88XJSwHiOc2KyaxPyBm+DJQtg1xBaScm+ZM6OmrCpYEJAeSpEUAOvk6YLYPPQWkxI50x7Xmv6S8eM3X0VsWkGqx00sVku5FAnjK10GzfegoICVWZ13N7HJo1dBLRkZtWUByBjvGERVT8XUALwugiBEBuI49FZBS/i6E4/W01EFJgJBGR2lxQHKGHdlxSmUREf5/yLmaPKg2k2FUKK5nAQWkPCoF1ksp1mc6HM7DKYMu5tdrWwCSV4T7nvy0SNFyGfdA4i7pkI78CsT1LaCAkFJmZB/cv+z5E2Z7aztAzBaI2wttBRiQ0D7+PHoNBRgQDhFWQEUBBoTDgxVgQDgGWAFjCvAVxJhuXCtEFGBAQuRA8zCNKcCAGNONa4WIAgxIiBxoHqYxBRgQY7pxrRBRgAEJkQPNwzSmAANiTDeuFSIK/D9ZECe5sE7qBgAAAABJRU5ErkJggg==">
+                                                        </div>
+                                                        <div class="file-options">
+                                                            <div class="state cloud" title="服务器上的文件" style="display: none;"></div>
+                                                            <div class="uploader-file-size">2.35MB</div>
+                                                            <div class="uploader-options delete" title="删除" style="display: none;"></div>
+                                                            <div class="uploader-options download" title="下载"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </td>
+                                            <td><div class="uploader">
+                                                <div class="uploader-list">
+                                                    <div class="file-card">
+                                                        <div class="file-name">房屋检测报告.docx</div>
+                                                        <div class="file-img">
+                                                            <img class="file-uploader-file" src="data:image/png;base64,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" id="7E991C7A42DC5349E05010AC0C05582B">
+                                                        </div>
+                                                        <div class="file-options">
+                                                            <div class="state cloud" title="服务器上的文件" style="display: none;"></div>
+                                                            <div class="uploader-file-size">25.45KB</div>
+                                                            <div class="uploader-options delete" title="删除" style="display: none;">
+                                                        </div>
+                                                        <div class="uploader-options download" title="下载"></div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>玄花园1号2栋</td>
+                                            <td>D</td>
+                                            <td>严重危房</td>
+                                            <td>停用治理</td>
+                                            <td><div name="identifyFileId_1" class="uploader"><div class="btns" style="display: none;"><div id="picker1546933112585" class="webuploader-container"><div class="webuploader-pick">文件上传</div><div id="rt_rt_1d0m6c3n61ksi1iuv1qgoh0ce0dj" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; overflow: hidden;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div></div><div class="uploader-list" style="height: 135px;"><div class="file-card" id="fc_7E991C7A42DB5349E05010AC0C05582B" style="width: 120px; height: 120px; position: absolute; left: 0px; top: 0px;"><div class="file-name">jgjd2017-0335江心洲花元村66号.docx</div><div class="file-img"><img class="file-uploader-file" src="data:image/png;base64,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" id="7E991C7A42DB5349E05010AC0C05582B" style="width: 86px; height: 70px;"></div><div class="file-options"><div target="7E991C7A42DB5349E05010AC0C05582B" class="state cloud" title="服务器上的文件" style="display: none;"></div><div class="uploader-file-size">2.35MB</div><div class="uploader-options delete" title="删除" target="7E991C7A42DB5349E05010AC0C05582B" style="display: none;"></div><div class="uploader-options download" title="下载" target="7E991C7A42DB5349E05010AC0C05582B"></div></div></div></div></div></td>
+                                            <td><div name="testingFileId_1" class="uploader"><div class="btns" style="display: none;"><div id="picker1546933113055" class="webuploader-container"><div class="webuploader-pick">文件上传</div><div id="rt_rt_1d0m6c3n915n7fg41onf1odt13ccm" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; overflow: hidden;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div></div><div class="uploader-list" style="height: 135px;"><div class="file-card" id="fc_7E991C7A42DD5349E05010AC0C05582B" style="width: 120px; height: 120px; position: absolute; left: 0px; top: 0px;"><div class="file-name">房屋检测报告.docx</div><div class="file-img"><img class="file-uploader-file" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAaZUlEQVR4Xu2dd3hUVfrHv2eS0KUjCIpKSyhKUWQRLOhDW8oKSViKFKlJQED9geCqi4oKiKKUJAiiIAssydCRBVQEWZEqRchQRIoiTWooIcmc3/NOiBthbpmbm5m5d97zPJA/5j3nvOd7388t557zXgEurAAroKiAYG1YAVZAWQEGhKODFVBRgAHh8GAFGBCOAVbAmAJ8BTGmG9cKEQUYkBA50DxMYwowIMZ041ohogADEiIHmodpTAEGxJhuXCtEFGBAQuRA8zCNKcCAGNONa4WIArYCpG7szLKZ7huPO4RoLoAGEjI8RI5jMA2zCCDKCkgh3WLndXeRAUeWPHchmBz0xRdbABIZndTFAYySQAMhYIsx+XIQg9lWQtxwSEejfc6Be4PZTyXfLB1MNWInV4hwRzgh8JgVxbeVzxKA8Px327Ak5HUItHGlJKy32pgtC0jtTkn1ECbXAqKS1US3o7/e0cgzUimzAAxPcyZMs9L4LQlI3dhplbLdjq1C4G4riW1nXzUBuTl4KeVElzNhhFW0sCQgtaOT/g2BLlYRORT81AsIaSElZricp+KAMe5g18ZygNSOTq4phdslIBzBLm4o+ecLIDchWX3phqPzieWDrgazTpYDJComcbKAeF5JVClxGQIrpRsHhQNBf4YK5uDwxTcpRX2HkM/4VkfuzsiMaPXzsgGnfKnnT1uLASJFVHTySSFwpzeRJOT+zEzZ8qelg4/7U0TuC6gVk9wrDHK2r1pIyBNZwtHyUErcPl/r+sPeUoB4pnVlxGklYdxu91P7Fw1e5w/huI8/K2AUkJxWZLrbLTsG47GzFCA5U7vY4/XqIXHZ5YwvyYEbGAXyBwgggWwB0TctNW5OYEbgvVdLARLZOamZw4GN3gGRu13OhPrBJG4o+aIGiIR0C4gzACpqaSLdeMe1KP4fWnb++p0B8ZfSNu9H9QoiZVa2Q9wXJrEGQB0tKSTkojBRvtvelC43tGwL+ncGpKAVDpH2tQBJcyZE1I2dViLbLZYJIVpoyiLl5ivX0fbYyoTzmrYFaMCAFKC4odS0HkA8esQuDIuSZ2cJiF5a+kgpD7uBlgecCYe1bAvqdwakoJQNsXZ1A3JTl6iYxNEC4h1tmeT5LBnW9qBz0GZtW/MtGBDzNQ3JFn0FhESKipnWWcAxH0AhDdFuSLi7uVIHL/K3uAyIvxW3aX9GACEpakZPbxIuslcBooyaNFJCCiFHp6UmjPenhAyIP9W2cV9GASFJakUnVnMAa4UQ1bQkkpBzXKJ8X6R0ydayNeN3BsQMFbkN9aUmUmbRLJaaTFXbJZYpXgSrIEQTLTmllOvCHLLj3pTB6Vq2+f2dAcmvglzfo0B+riC5EtaNXVgoW56dLyA665B1X7ZAqwMp8b/qsDVswoAYlo4r5lXADEBy2vMsSH1HCIzSofApt5St9jsTduuwNWTCgBiSjSvdqoB5gOS0XDsmuZeEnCWAMFW1Ja5KoLPLGb+6II4KA1IQqoZgm2YDQhJGdp7WwuEQywBRQk1SWusFKeJczvgZZkvPgJitaIi2VxCAkJQ1YpPrhEv3WgFRWUtaCbzvSo0bcTO9ipa5rt8ZEF0ysZGWAgUFCPV7f8cZFQtHZK4RQjyo5YcEVlw/WyT2yDfPXdey1fM7A6JHJbbRVKAgAaHOK3eYXqxkIfciIdBayxkJud2dEdbmwPJBZ7VstX5nQLQU4t91KVDQgOQ4McYRFV0xWQgM0OHUMZkd1tK1eOABHbaKJgxIftTjun8o4B9AcrqLikl6CRLvaaWZlcBFt3C3P5Ay2OsmOz2HjwHRoxLbaCrgT0BuQtIeQIoAimg4lwmgV1pq/ALNQXgxYECMqMZ1blNAa0+6G9L0DO8CoqgACus6HFIuSnMmROuyzWPEgPiqGNt7VUALkKCQTcq9ac6Eer74woD4ohbbKipgCUAAuCX67XfGz9J7KBkQvUqxnaoCkV0Sn3W4xedBL5MUX6Q549rp9ZMB0asU26kD0vHDSEehwq6gl0niyzRnfEu9fjIgepViO00FomISLwqIoE3eRwm2IeQHrpSElzQHc9OAAdGrFNtpKlAzJql9GLBEcwWuZksFYOChgxbTY4wrNf4NvT0wIHqVYjtdCtToPOPucGSOhEPUhdZSdV0tGjCSqI48H1eiIM/9PIMEA2JAUa5iJwVqxyROAsRwb2NiQOx0pHkshhRgQLzIJiUnrzYUTTasxIAwIDYMa/OGxIAwIOZFkw1bYkAYEBuGtXlDYkAYEPOiyYYtMSAMiA3D2rwhMSAMiHnRZMOWGBAGxIZhbd6QGBAGxLxosmFLDAgDYsOwNm9IDAgDYl402bAlBoQBsWFYmzckBoQBMS+abNgSA8KA2DCszRsSA8KAmBdNNmyJAWFAbBjW5g2JAWFAzIsmG7bEgDAgNgxr84bEgDAg5kWTDVtiQBgQG4a1eUNiQBgQ86LJhi0xIAyIDcPavCExIAyIedFkw5YYEAbEhmFt3pAYEAbEvGiyYUsMCANiw7A2b0gMCANiXjTZsCUGhAGxYVibNyQGhAExL5ps2BIDwoDYMKzNGxIDwoCYF002bIkBYUBsGNbmDYkBYUDMiyYbtsSAMCA2DGvzhsSAMCDmRZMNW2JAGBAbhrV5Q2JAGBDzosmGLTEgDIgNw9q8ITEgDIh50WTDloICkOqdku4MF6gpHIjwm8YS9YTAFG/9SSkPQ4h+fvPFTh0JKbMyw345tOS3n4ExbqsPLaCAVGw1p3iZkunzBERHqwvJ/v9ZAQn5c3a2bHdw8eA0K2sTUECiopP+IwRaW1lA9l1NAXk+U2RFHkoZesaqOgUMkKiYpCcFsM6qwrHf+hSQEpNdzvhh+qyDzypwgEQnjRIC7wafJOyRyQpsSUuNb2Jym35rLmCA1I5JGg9gpN9Gyh0FRAEp5QGXMyEyIJ2b0CkDYoKI3ISyAgzI/7QRvgQKX0F8Ucu6tgwIA2Ld6PWD5wwIA+KHMLNuFwwIA6IZvUIAFcsWR6VyJXDtRhYupWfg0pUMXLmWqVnXnwaFI8JQpWJJlCtZ1NPtT7+cx7lL1/LlAgNSQID0f6YhChcK0zw4UgIZN7Jw+eoNz7/0qxk4fuoSjpy4qFm3oAxKlSiMxxtWRYvG96FW1XK4p2JJRIQ7buvuwuXr2PDDMazfcQwbdhz1OzDVqpTGkw/di2YNquL+yqU9EBPMuYW03Xv4DL7eegRfbf0ZB4+d81kyBqSAANk8uy/uKFbI5wOSW+Hk71fw/Z5f8N9dx7Fu2xFcvZ5luC29FQmKfs80wENRd8Hh8GnOAhk3svHp8p1Idu7AjcxsvV36bBfmEOjSsg6e69gAd995h0/1D/96AR8v3oFl6w/orseABCkgeY9g+rUbWLhmH+as3IPT56/oPrh6DZvUq4KXnv0L6lWvoLeKoh2BPfaTbz1nbbPLYw2rYnSfR3Ff5dL5anrzj7/ihQ/Wgq6AWoUBsQAguS5mZ7uxYM0+vPf5JtPO0l1b18Vr/R77062JVtDo+T0xZRumLtymx1TThq4ab8Y9gU4tojRt9Rr8fvEaXk9e77k6qxUGxEKA5Lp66Pg5vDjpS9Bfo4Xu1Uf0bIo+HeobbUKz3opvD2L01K+R7ZaatkoGJYsXxpSRrdG4TmXDbShVpGeUFz5YgzXfH1ZsmwGxICDkMt3nJ4xbhe92/2IocAZFN8Kwro8YqutLpdkrdmP87O98qfKHbfGiEUgZF53vWyqlzi+mZ6DziBT8djadAdFxhHx6KtV6k672kJ6Z5cbOAyc9LoU5HChXuigqlC6OYkXCdbj5PxOa9YoZmeqZ9fKl1KpaFqkTYhAedvvMlLd2dh44hSMnLnief2gKtepdpXQ/yNNZuseri0Ft+FqmjGyDpxvfp6saTTlv23cCv/2eDtK3Qa2KqFOtAuj2zFtxuyX6jFmGbWm/qbbPV5AAXEFobr55v9m3HRiapnywZkU0b3APnnky0uvU6q2Vfj5xAdEjUnH9hr5ZLpquXTyxC2iKVK1QAC1YsxefLd+FX05fvs20fOmi6N7mAfTtWB+FItSns0+cTUeH4QtwLUOfj9QZzVSNGfi4Jhw0HZ6Yug1rNx/2zKTlLTRdTTo+2/YBVLllxmvi55swa9kuzfYZkCACJO/RKl+6GF7s0cRzgLXKJ0t34v2532uZeX7v3qYeXu3XXNWWgBgyfhUO6HhvULnCHZgyojVq319etU16YKcHdz2Fxr52Wg/V90j0XPPenE2Yu2oPCGa1QieFgZ0bYWCnRp6TDsE0bOIaPa6AAQlSQHLdatO0Ot4Z0gJFCinfftGZs0Xc57qmLVdP7e558adUaHan2yuLvF41lOrQmXr+251xX+VSiu2evXANLQbN0fXA/lr/x9CtdV3FtgiOF95fgy+3/KwryHON6lQrj1F9mmHg2JW6r7gMSJADQu61b14TE4Y9rRoMs5buxESNqwi9dU4c1Va1neffW42vfAw8apDu91PHR6u2/cq0dVjyzX5VmwpliuHLxGdVby+TndsxecFWn+AwasyAWAAQcvGdwS1Ub7foTXuT3p+onqGTR/8Vjzeqqhgruw6e9lw9jJbxQ59Gh8dqKlbfc+g0/j5avf0RvZriOZWpZ7r9azdsvudB3B+FAbEIIDXuKYtlH3RRjYmery/FdoVZmbAwB7Z/3k/1gXrIhP/k6w04PYc4J8Qo+uiWEk16z1Jds7U2sQeqVFBeQjJqytdYtkH/UpH8QsSAWAQQcvNfY59Bw8hKisd8yr+3Iil1u9ffH6hxJ/79bmfFupevZKBZv9nIys7fmXn5pL+j+t1lFPuJe/cLbNhxzOvvd5Uvga+SnlWsS+8tnhg4x7RVBHrgYUAsBEi/vzXwrJlSKt/v+RV931zu9Wd6Yz6yV1PFunRWprNzfsvQro8gLrqRYjMzFv+ASfM2e/29U4tIvJ3QQrEuTTu/OePb/LroU30GxEKANIqqhLlvPaN4gOllWeNen3j9fdKLrdC6aTXFuuM++w5zVu72KXi8GbdsUg0f/V8rxXa27juB3v9c5vX3cUOeQscnainWHTX1a59W4uZ7MABP8+YR0W9v0pVeFGodUHrz/cO8AYpvh6l+vS7TQff6t5a5b/0NjaLuUuziuTeWg1a55rfcU6kkVk/prtgMLTlvP3yB199pFoxmw5RKu2ELQC9G/Vn4CmKhKwi5unFmb5QtlbNjzltp3n82zl28fRfdikl/RzWVZ4O/DlvgWU6S30K7+ghipaJ2cvg6uScqlSuuWLdul2R4YT+/LqvWZ0AsBsiKD7uqLhOhszOdpW8t387sjXIqYD3WfzboJaEZ5ceFg+DIu7UvT6MU4BTo3sruBQMV14ddvZ6Jh3t6v300w2elNhgQiwEy7+1OnoV4SqXHq0vww/6chZB5y96Fcap7Phr1mKn77bJWQP53Vh+UuaOIohlN9dJCy7yFVu5unaOckP7k7+l4Km6uVtem/86AWAyQ+e90Rv2adyoGQs/XlmK76/YVqlqANOg+w7Tp042f9EbZm4kTvDn6SO9ZSL8FELq1olsspUIrllsPmWc6AFoNMiAWA2TlR109CQqUSscXF3rdSLVhRi/QIkClovTsohVA3n6nZxB6FvFWlG6xShQthC1z+ip2d/7ydTTr+5kRd/JVhwGxGCBazxKPD5iDsxeu3hYU9Bae3sYrldbPz8Pxk77tK/HWFj170DOIUqHnHHre8VZ2zR+ouAaLZuZohs7fhQGxECA0zbvjX/1VNzrVifX+ADz7jY6q21b7vbUCmwzuTswbtLSi94uPuinGMW0Tpquct7Juek9P6h7Fq1y/2fnOc+UrYAyIhQDRWi6i9qLw/Rdaou2j1RXjY8KcTZ7NUfkt9DKSXkoqFXrXQu9cvBVax6W2r6T/2BX4bpexLcZGx8WAWAgQ2iNBeyWUypa9JzzbSL0VraUmlGBh5OSvjMbRH/WGd3vEszlJqVBeqg/nbfH684ShT6O9ymrgD/61GTOX/JBvH31pgAGxECBTX26Dpx5W3qM9beE2TFPYtUc5rxaOU96vQalE6SE4PxlISEqtxYoD3/4CG3d6X6yotRaLpq9pGtufhQGxCCC0p3rN1B6q7zJ6/XMptu3znoSA3tttmd0P9L5BqcSPW4X1248ajj9KBrHkfeUl+TSD1bjXTMUskTQ1TFPEasXfy00YEIsAMjbhSXRWSZxGSRsa91TfMJU0qi2eeOhexfijzCPd/7HYMCBat0i7D51GV40NU1rT2M6v0vBa8nrDPvpakQGxACBaK2RpCLQSl1bkqpUnGt2LpNHqW26NbpqqWbUslqpcPcgvPVtu46IfwtCujRWHQVchymW1/+jvvsa6IXsGJMgBafpAFUx9uS2KFvZP0gZKrkB5rHzJtUVJG1LGx6gmk6b3H08O1E7aUKxIBNZ/3Ev1VpCmimn3JG2g8rXQJADl+H1Z54QEAxLEgMQ8XRv/HPi46vJ2vVeP3GF2bVUXrw9Qngkju19PX0afN5Z5/moVyo81/ZV2mml/KMkCJVvQUyjdEX0+Qq3QFYSmi/UkoKZ26B1SQuzDf2zm0pv4gQEJMkBKFi/kOcPRwVRbUpLrNp3po0em3ra2SSm49CaOo3cqb8zYgJUbDyouMX+s4T14d8hTquuuyA9K7UmrjPUmjqOH9VVTuml+PoKuSi9NWgua3lYrtE2Zkl/fuhWY8gYv1fgUAgMSAEAoUGYt2+npmVKP0lm4QuliuL9KGVStpJyz6tYgoCXgMS+n+vyxHV9Sj54+dwWLv9mPo79dxKlzV1C+VE7qUbpVubeSch6sXF/pmaH7PxaBMqb4UujWcsar7XV9p4QWZy7+ej+On85ZKlO0UDjuLFvco2WbR2so3vrRlPbAsSuwaY/yRjEGJACA+BIoSra0Nmn4RN+Tp+W2N6BTQ7zQvYkZrqi28enyXZ4MiEaK1h58I23eWudaRiY6vLAQJ854v51kQCwICGUgGTpxTb62yNKiwpd7N0XPdg+aEWde21i/4yiGTFgN+q6J0UIQE8wFVRas3os3ZyongmBALAYI7ckeMHal4hnP10AqqA/oUFpQ+opTfuDIHQt9OIeeIZQytfs65lz7jxftwIfzvS97+d8tojzgciZoJ0g26kQB16sdkzgJEMO9dSOBMa7U+Df0uuC3pA16Hcprd/TkRXy2bBcWrXOZnlWQ7vfHDHpCNWevXp8pkfTcVT9iwpzvNJNK622T7B6pW9mTXZKSZee3nL90HeM++y+Wf3tQsym+ggTxFYTWR1GuK/oC0qrvDhVowgKa3erdvj7iYxqhaGHl5ShqEbXDdRJjPt6Qry9fqbVPn1no074+BkU3NOQjPZTPX/0jPpq/RfcXeRmQAgKElnUUU1n3lDcQsrLcoA91XrpCn4G+gTPnr3imLukTxv7O4kFf5m3zaHVPHmC1LI65/tNHO+lZgxJeb9x5XPOMbIYBzfr9tVlNzyegH65zl+aHgI6dvIQl37g8ibPJX18KA1JAgPhyEILVlj6zTKmCShUvjJIlCoO2xdLU8sUrGbiUnoFfz1w29O1xM8dLiy9pn0zpEkU8PtLfzKxsz1t2ugJTsocffzpjuEsGhAExHDyhUJEBYUBCIc4Nj5EBYUAMB08oVGRAGJBQiHPDY2RAGBDDwRMKFRkQw4AkvgWIV0MhSEJ5jBLY40qNL7j1OAUsbsDepEdFJ3cTQvo/F2YBC8rN/1kBCfmpKzVBOeVjkAsWMEBqxE6uEC7DDwkI/evTg1xMdu8WBaTMko6wRq6UQXusqk3AACHBoqKTOwDuFCFEYasKyH57V0BCXpNuR6/9i+JSraxRQAEh4WrGTmsQ7nYMBGRNKWBsEZOBIyCBUgJooFA1HYC+/a0G+rZ1FQk3pNgkhPgszRmnvZoxyMUIOCCB0ieyc1IzhwMbvfUvpdztcibUD5Rv3G/wKMCAeDkWDEjwBGigPWFAGJBAx2BQ98+AMCBBHaCBdo4BYUACHYNB3T8DwoAEdYAG2jkGhAEJdAwGdf8MCAMS1AEaaOcYEAYk0DEY1P0zIAxIUAdooJ1jQBiQQMdgUPfPgDAgQR2ggXaOAWFAAh2DQd0/A8KABHWABto5BoQBCXQMBnX/DAgDEtQBGmjnGBAGJNAxGNT9MyAMSFAHaKCdY0AYkEDHYFD3z4AwIEEdoIF2jgFhQAIdg0HdPwPCgAR1gAbaOQaEAQl0DAZ1/yELSM3o6U3Chft7b0dHSrhczvjaQX3k2Dm/KBAVnThVCDHYe2fytbTUhLF6HfHpK7d6Gy0ou1rRidXChPhJof0baamnigJjjH+gvKAc53b9qkDtmKQvATzt/UQqB7mcCR/rdchSgNwd+0HREu6iV4SAV78l5Cuu1IR39Q6e7eynwM2TqAvwnvFTAh1cqfEr9I7cUoDQoGpHJ26CEH9RuM2SQuA9h4gYvzel/zm9IrCdPRSIjE2MFFKkCOABr/EBXA8T7gp7UwZTmlpdxXKAREYnjnAIMUF1dJShHNgCgUxdKrCR5RUQQBUpRXWluwsaoJRynsuZ0MOXwVoOkBptJ5eMKB5+BBBlfBko27ICmULUPZQSt88XJSwHiOc2KyaxPyBm+DJQtg1xBaScm+ZM6OmrCpYEJAeSpEUAOvk6YLYPPQWkxI50x7Xmv6S8eM3X0VsWkGqx00sVku5FAnjK10GzfegoICVWZ13N7HJo1dBLRkZtWUByBjvGERVT8XUALwugiBEBuI49FZBS/i6E4/W01EFJgJBGR2lxQHKGHdlxSmUREf5/yLmaPKg2k2FUKK5nAQWkPCoF1ksp1mc6HM7DKYMu5tdrWwCSV4T7nvy0SNFyGfdA4i7pkI78CsT1LaCAkFJmZB/cv+z5E2Z7aztAzBaI2wttBRiQ0D7+PHoNBRgQDhFWQEUBBoTDgxVgQDgGWAFjCvAVxJhuXCtEFGBAQuRA8zCNKcCAGNONa4WIAgxIiBxoHqYxBRgQY7pxrRBRgAEJkQPNwzSmAANiTDeuFSIK/D9ZECe5sE7qBgAAAABJRU5ErkJggg==" id="7E991C7A42DD5349E05010AC0C05582B" style="width: 86px; height: 70px;"></div><div class="file-options"><div target="7E991C7A42DD5349E05010AC0C05582B" class="state cloud" title="服务器上的文件" style="display: none;"></div><div class="uploader-file-size">25.45KB</div><div class="uploader-options delete" title="删除" target="7E991C7A42DD5349E05010AC0C05582B" style="display: none;"></div><div class="uploader-options download" title="下载" target="7E991C7A42DD5349E05010AC0C05582B"></div></div></div></div></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="div5" name="div5" style="display: none;">
+                                <div class="title"><span>签订合同</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <th>经办人</th>
+                                        <td>朱博文</td>
+                                        <th>操作时间</th>
+                                        <td>2019-01-04 09:49:55</td>
+                                    </tr>
+                                    <tr>
+                                        <th>合同金额</th>
+                                        <td>200000 元</td>
+                                        <th>鉴定次数</th>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <th>合同</th>
+                                        <td colspan="3"><div name="contractFile" class="uploader">
+                                            <div class="uploader-list" style="height: 135px;"><div class="file-card" style="width: 120px; height: 120px; position: absolute; left: 0px; top: 0px;"><div class="file-name">房屋安全鉴定合同模板.docx</div><div class="file-img"><img class="file-uploader-file" src="data:image/png;base64,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" id="7E98D177A257876BE05010AC0C0558C8" style="width: 86px; height: 70px;"></div><div class="file-options"><div target="7E98D177A257876BE05010AC0C0558C8" class="state cloud" title="服务器上的文件" style="display: none;"></div><div class="uploader-file-size">17.58KB</div><div class="uploader-options delete" title="删除" target="7E98D177A257876BE05010AC0C0558C8" style="display: none;"></div><div class="uploader-options download" title="下载" target="7E98D177A257876BE05010AC0C0558C8"></div></div></div></div></div></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="div6" style="display: none;">
+                                <div class="title"><span>出具方案</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <th>经办人</th>
+                                        <td>朱博文</td>
+                                        <th>操作时间</th>
+                                        <td>2019-01-04 09:48:49</td>
+                                    </tr>
+                                    <tr>
+                                        <th>出具文安时间</th>
+                                        <td colspan="3">2019-01-04 09:48:49</td>
+                                    </tr>
+                                    <tr>
+                                        <th>合同</th>
+                                        <td colspan="3"><div name="fangAn1" class="uploader">
+                                            <div class="uploader-list">
+                                                <div class="file-card">
+                                                    <div class="file-name">房屋安全性鉴定方案.docx</div>
+                                                    <div class="file-img">
+                                                        <img class="file-uploader-file" src="data:image/png;base64,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">
+                                                    </div>
+                                                    <div class="file-options">
+                                                        <div class="state cloud" title="服务器上的文件" style="display: none;"></div>
+                                                        <div class="uploader-file-size">85.40KB</div>
+                                                        <div class="uploader-options delete" title="删除" style="display: none;"></div>
+                                                        <div class="uploader-options download" title="下载"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="div7" style="display: none;">
+                                <div class="title"><span>初勘</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <th>经办人</th>
+                                        <td>朱博文</td>
+                                        <th>操作时间</th>
+                                        <td>2019-01-04 09:47:37</td>
+                                    </tr>
+                                    <tr>
+                                        <th>实施时间</th>
+                                        <td>2019-01-09 00:00:00</td>
+                                        <th>房屋检查意见</th>
+                                        <td>继续勘察</td>
+                                    </tr>
+                                    <tr>
+                                        <th>现场照片</th>
+                                        <td></td>
+                                        <th>附档文件</th>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="div8" style="display: none;">
+                                <div class="title"><span>受理</span></div>
+                                <table class="table table-bordered table-data">
+                                    <colgroup>
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <th>经办人</th>
+                                        <td>朱博文</td>
+                                        <th>操作时间</th>
+                                        <td>2019-01-04 09:46:13</td>
+                                    </tr>
+                                    <tr>
+                                        <th>紧急程度</th>
+                                        <td>一般</td>
+                                        <th>要求完成时间</th>
+                                        <td>2019-01-10 00:00:00</td>
+                                    </tr>
+                                    <tr>
+                                        <th>分派对象</th>
+                                        <td colspan="3"><p>负责人：朱博文</p>
+                                            <p>参与人员：李杰，杜磊</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="div9" style="display: none;">
+                                <div class="title"><span>鉴定申请</span></div>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab1">委托人申请鉴定</a></li>
+                                    <li><a href="#tab2">鉴定房屋分栋信息表</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab1">
+                                        <table class="table table-bordered table-data">
+                                            <colgroup>
+                                                <col width="20%">
+                                                <col width="30%">
+                                                <col width="20%">
+                                            </colgroup>
+                                            <caption style="text-align: center;font-weight: bold;font-size: 200%; display:none;">
+                                                房屋鉴定委托书&nbsp;&nbsp;&nbsp;<span style="font-size: 15px;color: #2a80b9!important;"><button id="saveExport" style="display: none;">下载</button></span></caption>
+                                            <tbody>
+                                            <tr>
+                                                <th>经办人</th>
+                                                <td>朱博文</td>
+                                                <th>操作时间</th>
+                                                <td>2019-01-04 09:44:14</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4" style="text-align: center">委托人信息</th>
+                                            </tr>
+                                            <tr>
+                                                <th>委托人</th>
+                                                <td>张三</td>
+                                                <th>委托人性质</th>
+                                                <td>产权人</td>
+                                            </tr>
+                                            <tr>
+                                                <th>联系人</th>
+                                                <td>张三</td>
+                                                <th>联系电话一</th>
+                                                <td>13811111111</td>
+                                            </tr>
+                                            <tr>
+                                                <th>联系电话二</th>
+                                                <td colspan="3"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>委托鉴定目的及内容</th>
+                                                <td>无</td>
+                                                <th>申请鉴定内容</th>
+                                                <td>危险性鉴定(城市)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>房屋使用变迁改建、维修概况</th>
+                                                <td colspan="3"><span style="float:left;">危险性鉴定</span></td>
+                                            </tr>
+                                            <tr>
+                                                <th>房屋产权证号</th>
+                                                <td>
+                                                    <div></div>
+                                                </td>
+                                                <th>身份证号</th>
+                                                <td>
+                                                    <div>630104198806121014</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>房屋产权证</th>
+                                                <td>
+                                                    <div class="uploader">
+                                                        <div class="uploader-list" style="height: 135px;">
+                                                            <div class="file-card" style="width: 120px; height: 120px;">
+                                                                <div class="file-pic">
+                                                                    <img class="file-uploader-file" src="http://172.16.5.9:8090/upload_bsg/2019/01/04/7E98D177A253876BE05010AC0C0558C8.jpg">
+                                                                </div>
+                                                                <div class="file-name">产权证.jpg</div>
+                                                                <div class="file-options">
+                                                                    <div class="state cloud" title="服务器上的文件" style="display: none;"></div>
+                                                                    <div class="uploader-file-size">72.49KB</div>
+                                                                    <div class="uploader-options delete" title="删除" style="display: none;"></div>
+                                                                    <div class="uploader-options download" title="下载"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <th>身份证</th>
+                                                <td>
+                                                    <div name="sFileId" class="uploader">
+                                                        <div class="uploader-list" style="height: 135px;">
+                                                            <div class="file-card" style="width: 120px; height: 120px;">
+                                                                <div class="file-img">
+                                                                    <img class="file-uploader-file" src="http://172.16.5.9:8090/upload_bsg/2019/01/04/7E98D177A254876BE05010AC0C0558C8.jpg">
+                                                                </div>
+                                                                <div class="file-name">身份证.jpg</div>
+                                                                <div class="file-options">
+                                                                    <div class="state cloud" title="服务器上的文件" style="display: none;"></div>
+                                                                    <div class="uploader-file-size">100.39KB</div>
+                                                                    <div class="uploader-options delete" title="删除" style="display: none;"></div>
+                                                                    <div class="uploader-options download" title="下载"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>其他</th>
+                                                <td>
+                                                    <div name="qFileId" class="uploader"><div class="btns" style="display: none;"><div id="picker1546929910579" class="webuploader-container"><div class="webuploader-pick">文件上传</div><div id="rt_rt_1d0m3ac4o1q441b6t11okjsn1ikdv" style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px; overflow: hidden;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div></div><div class="uploader-list" style="height: 0px; width: 100%; margin: 2px;"></div></div>
+                                                </td>
+                                                <th>鉴定委托书</th>
+                                                <td>
+                                                    <div name="clientIdentifyFile" class="uploader"><div class="btns" style="display: none;"><div id="picker1546929910416" class="webuploader-container"><div class="webuploader-pick">文件上传</div><div id="rt_rt_1d0m3ac4v1aun1fqo16gnjvaip12" style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px; overflow: hidden;"><input type="file" name="file" class="webuploader-element-invisible" multiple="multiple"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div></div><div class="uploader-list" style="height: 135px;"><div class="file-card" id="fc_7E98D177A256876BE05010AC0C0558C8" style="width: 120px; height: 120px; position: absolute; left: 0px; top: 0px;"><div class="file-name">鉴定委托书-扫描件.jpg</div><div class="file-img"><img class="file-uploader-file" src="http://172.16.5.9:8090/upload_bsg/2019/01/04/7E98D177A256876BE05010AC0C0558C8.jpg" id="7E98D177A256876BE05010AC0C0558C8" style="width: 86px; height: 70px;"></div><div class="file-options"><div target="7E98D177A256876BE05010AC0C0558C8" class="state cloud" title="服务器上的文件" style="display: none;"></div><div class="uploader-file-size">52.45KB</div><div class="uploader-options delete" title="删除" target="7E98D177A256876BE05010AC0C0558C8" style="display: none;"></div><div class="uploader-options download" title="下载" target="7E98D177A256876BE05010AC0C0558C8"></div></div></div></div></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4" style="text-align: center">房屋概况</th>
+                                            </tr>
+                                            <tr>
+                                                <th>丘权号</th>
+                                                <td></td>
+                                                <th><span style="float: right">房屋地址</span></th>
+                                                <td><span name="idengtifyAddress" style="float:left;">玄武区玄武门街道玄武花园1号</span></td>
+                                            </tr>
+                                            <tr>
+                                                <th>备注</th>
+                                                <td colspan="3"><span style="float:left;">1、申请受理室加盖“已登记”章为有效。</span><br><span style="float:left;">2、委托人因故撤销鉴定时，必须书面通知鉴定单位。</span><br><span style="float:left;">3、鉴定单位对鉴定项目的资料及鉴定报告负有保密责任。</span><br></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="tab2">
+                                        <table class="table table-bordered table-data">
+                                            <colgroup>
+                                                <col width="20%">
+                                                <col width="30%">
+                                                <col width="20%">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th>房屋名称</th>
+                                                <td colspan="3">玄武花园1号1栋</td>
+                                                <td style="border-top: hidden;border-right:hidden;border-bottom: hidden "><a class="btn btn-link btn-toggle"><i class="fa invisible"></i></a></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th>结构类型</th>
+                                                <td>钢筋混凝土结构</td>
+                                                <th>房屋层数(地上)</th>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <th>房屋层数(地下)</th>
+                                                <td colspan="3">2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>建筑年代</th>
+                                                <td>2009</td>
+                                                <th>设计用途</th>
+                                                <td>住宅</td>
+                                            </tr>
+                                            <tr>
+                                                <th>建筑面积</th>
+                                                <td>1000㎡</td>
+                                                <th>鉴定面积</th>
+                                                <td>1000㎡</td>
+                                            </tr>
+                                            <tr>
+                                                <th>鉴定部位</th>
+                                                <td></td>
+                                                <th>权利性质</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>产权人</th>
+                                                <td>张工</td>
+                                                <th>使用人</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>施工单位</th>
+                                                <td></td>
+                                                <th>设计单位</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>勘查单位</th>
+                                                <td></td>
+                                                <th>监理单位</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>图纸材料</th>
+                                                <td colspan="3"><div class="tFileId uploader">
+                                                    <div class="btns" style="display: none;">
+                                                    <div id="picker1546929909986" class="webuploader-container">
+                                                        <div class="webuploader-pick">文件上传</div>
+                                                        <div id="rt_rt_1d0m3ac55jtg1m6k1l6c1a9i1qsc15" style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px; overflow: hidden;">
+                                                            <input type="file" name="file" class="webuploader-element-invisible" multiple="multiple">
+                                                            <label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="uploader-list" style="height: 135px;">
+                                                        <div class="file-card" id="fc_7E98D177A255876BE05010AC0C0558C8" style="width: 120px; height: 120px; position: absolute; left: 0px; top: 0px;">
+                                                            <div class="file-name">设计图纸.jpg</div>
+                                                            <div class="file-img"><img class="file-uploader-file" src="http://172.16.5.9:8090/upload_bsg/2019/01/04/7E98D177A255876BE05010AC0C0558C8.jpg" id="7E98D177A255876BE05010AC0C0558C8" style="width: 86px; height: 70px;"></div>
+                                                            <div class="file-options"><div target="7E98D177A255876BE05010AC0C0558C8" class="state cloud" title="服务器上的文件" style="display: none;"></div>
+                                                                <div class="uploader-file-size">55.55KB</div>
+                                                                <div class="uploader-options delete" title="删除" target="7E98D177A255876BE05010AC0C0558C8" style="display: none;"></div>
+                                                                <div class="uploader-options download" title="下载" target="7E98D177A255876BE05010AC0C0558C8"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-bordered table-data">
+                                            <colgroup>
+                                                <col width="20%">
+                                                <col width="30%">
+                                                <col width="20%">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th>房屋名称</th>
+                                                <td colspan="3">玄武花园1号2栋</td>
+                                                <td style="border-top: hidden;border-right:hidden;border-bottom: hidden "><a class="btn btn-link btn-toggle"><i class="fa invisible"></i></a></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th>结构类型</th>
+                                                <td>钢筋混凝土结构</td>
+                                                <th>房屋层数(地上)</th>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <th>房屋层数(地下)</th>
+                                                <td colspan="3">2</td>
+                                            </tr>
+                                            <tr>
+                                                <th>建筑年代</th>
+                                                <td>2009</td>
+                                                <th>设计用途</th>
+                                                <td>住宅</td>
+                                            </tr>
+                                            <tr>
+                                                <th>建筑面积</th>
+                                                <td>1200㎡</td>
+                                                <th>鉴定面积</th>
+                                                <td>1200㎡</td>
+                                            </tr>
+                                            <tr>
+                                                <th>鉴定部位</th>
+                                                <td></td>
+                                                <th>权利性质</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>产权人</th>
+                                                <td>张工</td>
+                                                <th>使用人</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>施工单位</th>
+                                                <td></td>
+                                                <th>设计单位</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>勘查单位</th>
+                                                <td></td>
+                                                <th>监理单位</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>图纸材料</th>
+                                                <td colspan="3"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div class="copyright">版权所有 © 2009-2018 南京 思创信息技术有限公司 苏ICP备12007792号</div>
+</div>
+
+<!-- jquery & plugins -->
+<script src="http://172.16.5.212/js/vendor/jquery.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery-ui-1.10.1.custom.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery-validate-1.16.0.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.ztree.all.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.metisMenu.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.slimscroll.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.cookie.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.menu.js"></script>
+
+<!-- bootstrap & plugins -->
+<script src="http://172.16.5.212/js/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-switch.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-table.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-table-zh-CN.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-hover-dropdown.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-datetimepicker.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/select/js/bootstrap-select.js"></script>
+
+<!-- upload -->
+<script src="http://172.16.5.212/js/vendor/webuploader.js"></script>
+
+<!-- underscore -->
+<script src="http://172.16.5.212/js/vendor/underscore-1.9.1.js"></script>
+
+<!-- 模拟浏览器进度条组件 -->
+<script src="http://172.16.5.212/js/vendor/pace.min.js"></script>
+
+<!-- layer 组件，消息提示框用 -->
+<script src="http://172.16.5.212/js/vendor/layer/layer.min.js"></script>
+
+<!-- custom -->
+<script src="http://172.16.5.212/js/main/core.js"></script>
+<script src="http://172.16.5.212/js/main/common.js"></script>
+
+<script>
+    $(function(){
+        //初始化
+        $('.lc_side li').eq(0).css('height',$('#div1').height());
+
+        //lc_content Height
+        lcContentH();
+        //tabs
+        $('.nav-top-lc a').click(function () {
+            $(this).parent('li').addClass('active').siblings('li').removeClass('active');
+        });
+
+        //lc
+        $('.lc_side a').on('click',function () {
+            var li = $(this).parent('li');
+            var liIndex = li.index() + 1;
+            if(li.hasClass('open')){
+                $('#div' + liIndex).hide();
+                li.css('height','');
+            }else {
+                $('#div' + liIndex).show();
+                a = $(li).offsetHeight;
+                b = $('#div' + liIndex).height();
+                var liH = a > b ? a : b;
+                li.css('height',liH);
+            }
+            li.toggleClass('open');
+            return false;
+        });
+    });
+
+    //lc_content Height
+    function lcContentH(){
+        var windowH = $('#wrapper').height() - 110;
+        $('.lc_content').css('min-height',windowH + 'px')
+    }
+</script>
+</body>
+</html>
+<!--add by yanyj 20190115 end-->

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--add by wangwj 20190305 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyOrgMainMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyOrgMain">
+        <id property="id" column="id"/>
+        <collection property="identifyOrgPersonList" column="id"
+                    select="com.thinvent.nj.identify.mapper.IdentifyOrgPersonMapper.getIdentifyOrgPersonListByMainId"/>
+        <collection property="identifyOrgIdentifyList" column="id"
+                    select="com.thinvent.nj.identify.mapper.IdentifyOrgIdentifyMapper.getIdentifyOrgIdentifyListByMainId"/>
+        <collection property="identifyOrgDeviceList" column="id"
+                    select="com.thinvent.nj.identify.mapper.IdentifyOrgDeviceMapper.getIdentifyOrgDeviceListByMainId"/>
+        <collection property="identifyOrgTypeList" column="id"
+                    select="com.thinvent.nj.identify.mapper.IdentifyOrgTypeMapper.getIdentifyOrgTypeListByMainId"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_MAIN
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT a.*,b.NAME personName
+        FROM T_IDENTIFY_ORG_MAIN a,T_IDENTIFY_ORG_PERSON b
+        WHERE a.DELETE_FLAG = 0 and a.id=b.ORG_ID and b.TYPE=1
+        <if test="orgName != null and orgName !=''">
+            AND a.NAME LIKE '%'||#{orgName}||'%'
+        </if>
+        <if test="legalPerson != null and legalPerson !=''">
+            AND b.NAME LIKE '%'||#{legalPerson}||'%'
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgMain">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ORG_MAIN (
+                ID,
+                NAME,
+                ADDRESS,
+                REGISTERED_CAPITAL,
+                BUILD_DATE,
+                BUSINESS_TERM_START,
+                BUSINESS_TERM_END,
+                UNIFIED_CODE,
+                REGISTRATION_OFFICE,
+                ORG_CODE,
+                ORG_START,
+                ORG_END,
+                QUALI_CODE,
+                QUALI_PROJECT,
+                QUALI_PROJECT_START,
+                QUALI_PROJECT_END,
+                MAPPING_CODE,
+                MAPPING_START,
+                MAPPING_END,
+                TOTAL_NUM,
+                ADV_PERSON_NUM,
+                MID_PERSON_NUM,
+                LEVEL_1_NUM,
+                LEVEL_2_NUM,
+                ROCK_NUM,
+                REQUEST_TYPE,
+                PUNISHMENT,
+                PLATFORM_ID,
+                TYPE,
+                USE_STATUS
+        )
+        VALUES (
+            #{id},
+            #{name},
+            #{address},
+            #{registeredCapital},
+            #{buildDate},
+            #{businessTermStart},
+            #{businessTermEnd},
+            #{unifiedCode},
+            #{registrationOffice},
+            #{orgCode},
+            #{orgStart},
+            #{orgEnd},
+            #{qualiCode},
+            #{qualiProject},
+            #{qualiProjectStart},
+            #{qualiProjectEnd},
+            #{mappingCode},
+            #{mappingStart},
+            #{mappingEnd},
+            #{totalNum},
+            #{advPersonNum},
+            #{midPersonNum},
+            #{level1Num},
+            #{level2Num},
+            #{rockNum},
+            #{requestType},
+            #{punishment},
+            #{platformId},
+            #{type},
+            #{useStatus}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgMain">
+        UPDATE T_IDENTIFY_ORG_MAIN
+        SET
+            ID = #{id},
+            NAME = #{name},
+            ADDRESS = #{address},
+            REGISTERED_CAPITAL = #{registeredCapital},
+            BUILD_DATE = #{buildDate},
+            BUSINESS_TERM_START = #{businessTermStart},
+            BUSINESS_TERM_END = #{businessTermEnd},
+            UNIFIED_CODE = #{unifiedCode},
+            REGISTRATION_OFFICE = #{registrationOffice},
+            ORG_CODE = #{orgCode},
+            ORG_START = #{orgStart},
+            ORG_END = #{orgEnd},
+            QUALI_CODE = #{qualiCode},
+            QUALI_PROJECT = #{qualiProject},
+            QUALI_PROJECT_START = #{qualiProjectStart},
+            QUALI_PROJECT_END = #{qualiProjectEnd},
+            MAPPING_CODE = #{mappingCode},
+            MAPPING_START = #{mappingStart},
+            MAPPING_END = #{mappingEnd},
+            TOTAL_NUM = #{totalNum},
+            ADV_PERSON_NUM = #{advPersonNum},
+            MID_PERSON_NUM = #{midPersonNum},
+            LEVEL_1_NUM = #{level1Num},
+            LEVEL_2_NUM = #{level2Num},
+            ROCK_NUM = #{rockNum},
+            USE_STATUS = #{useStatus},
+            REQUEST_TYPE = #{requestType},
+            PUNISHMENT = #{punishment},
+            PLATFORM_ID = #{platformId},
+            TYPE = #{type}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ORG_MAIN
+        WHERE id = #{id}
+    </delete>
+
+    <update id="OrgUseOrUnUse" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgMain">
+        UPDATE T_IDENTIFY_ORG_MAIN
+        SET
+        USE_STATUS = #{useStatus}
+        WHERE id = #{id}
+    </update>
+
+    <select id="getOrgMainByPlatformId" parameterType="String" resultMap="map">
+        SELECT * FROM T_IDENTIFY_ORG_MAIN
+        WHERE PLATFORM_ID = #{platformId}
+    </select>
+
+    <update id="deleteOrgMainByMainId" parameterType="String">
+        UPDATE T_IDENTIFY_ORG_MAIN
+        SET
+        DELETE_FLAG =1,
+        REQUEST_TYPE = 3
+        WHERE ID =#{mainId}
+    </update>
+    <select id="getIdentifyOrgsByTypeId" resultMap="map">
+       SELECT
+  c.ID,
+  c.NAME,
+  d.CREDIT_GRADE_NAME,
+  c.ADDRESS
+
+FROM T_IDENTIFY_ORG_TYPE a, T_BASE_DICT_ITEM b, T_IDENTIFY_ORG_MAIN c
+LEFT JOIN T_IDENTIFY_ORG_CREDIT d ON d.IDENTIFY_ORG_ID = c.ID
+WHERE a.IDENTIFY_ORG_ID = c.ID AND a.IDENTIFY_TYPE_KEY = b.VALUE
+      AND
+        b.ID = #{identifyTypeId}
+    </select>
+
+
+
+</mapper>
+        <!--add by wangwj 20190305 end -->

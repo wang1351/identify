@@ -1,0 +1,12 @@
+
+
+swagger:
+  controller:
+    package: com.thinvent.nj.identify.controller
+  title: 基础信息系统 REST API for Internet
+  api:
+    version: v1.0.0
+
+
+dubbo:
+  switch: off

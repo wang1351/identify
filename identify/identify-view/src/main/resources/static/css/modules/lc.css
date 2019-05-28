@@ -1,0 +1,129 @@
+/* CSS Document by_hanwy-20190104
+ * lc.css
+ */
+.portlet-header{
+    border:1px solid #ddd;
+}
+
+/* 流程 */
+.lc_content{
+    padding:15px 15px 0;
+    margin:-15px -15px 0;
+    border-bottom:1px solid #ddd;
+    position: relative;
+}
+/* 流程左侧 */
+.lc_side{
+    float:left;
+    width:170px;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    overflow:hidden;
+}
+.lc_side .lc_side_inner{
+    height:100%;
+    padding-right:9px;
+    margin:0 -17px 0 0;
+    list-style:none;
+    overflow:hidden;
+    overflow-y:scroll;
+}
+.lc_side ul{
+    min-height:100%;
+    padding:10px 0 0;
+    background-color:#f8f9fa;
+    border-right:1px solid #ddd;
+    text-align:right;
+}
+.lc_side ul > li{
+    padding:10px 0;
+    position: relative;
+    z-index:1;
+}
+.lc_side ul > li > a{
+    display:block;
+    padding:0 15px;
+    color:#666;
+}
+.lc_side ul > li:hover:after,
+.lc_side ul > li > a:hover{
+    color:#3598db;
+}
+.lc_side ul > li:after{
+    content:'\f056';
+    display:block;
+    width:14px;
+    height:14px;
+    position:absolute;
+    top:15px;
+    right:-7px;
+    border-radius:10px;
+    line-height:14px;
+    text-align:center;
+    font-family:FontAwesome;
+    font-size:14px;
+    color:#888;
+    background-color:#fff;
+}
+.lc_side .lc_title{
+    display:inline-block;
+    vertical-align:top;
+    text-align:left;
+}
+.lc_side .lc_time{
+    display:block;
+    margin-top:1px;
+    font-style:normal;
+    font-weight:normal;
+    font-size:12px;
+    opacity:.5;
+}
+.lc_side ul > li.open + li{
+    margin-top:20px;
+}
+.lc_side ul > li.open > a{
+    color:#3598db;
+    font-weight:bold;
+}
+.lc_side ul > li.open:after{
+    content: '\f138';
+    color:#3598db;
+}
+/* 流程内容 */
+.lc_main{
+    margin-left:160px;
+    padding-left:15px;
+}
+.portlet-header .nav-tabs,
+.nav-tabs.nav-top-lc{
+    margin:-8px -15px 0;
+}
+.portlet-body .nav-tabs.nav-top-lc{
+    margin-top:-15px;
+    margin-bottom:10px;
+}
+.portlet-header .nav-tabs > li.active > a,
+.nav-tabs.nav-top-lc > li.active > a{
+    border-top-color:transparent;
+}
+.portlet-header .nav-tabs > li:first-child.active > a,
+.nav-tabs.nav-top-lc > li:first-child.active > a{
+    border-left-color:transparent;
+}
+.nav-tabs.nav-top-lc + .lc_content{
+    margin-top:0;
+    border-top:1px solid #ddd;
+}
+.nav-top-lc.nav-lc-hide + .lc_content{
+    margin-top:-15px;
+    margin-bottom:15px;
+    border-top-width:0;
+}
+.lc_content .tab-content{
+    margin-bottom:20px;
+}
+.lc_content.lc_cont_margin{
+    margin-bottom:15px;
+}

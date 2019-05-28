@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.ReviewMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.Review">
+        <id property="id" column="id"/>
+    </resultMap>
+    <!-- add by xujc 2018/12/4 start -->
+    <resultMap id="allMap" type="com.thinvent.nj.identify.entity.Review">
+        <id property="id" column="id"/>
+        <result property="mainId" column="main_Id"></result>
+        <association property="identifyMain" column="main_Id"
+                     select="com.thinvent.nj.identify.mapper.IdentifyMainMapper.get"/>
+        <collection property="expertAppoints" ofType="com.thinvent.nj.identify.entity.ExpertAppoint"
+                    column="id"
+                    select="com.thinvent.nj.identify.mapper.ExpertAppointMapper.getAppointExpertListByReviewId">
+        </collection>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="allMap">
+        SELECT *
+        from T_IDENTIFY_REVIEW
+        where ID = #{id}
+          and DELETE_FLAG = 0
+    </select>
+
+    <!-- add by xujc 2018/12/4 end -->
+    <select id="findList" parameterType="map" resultMap="allMap">
+        SELECT
+        R.ID,
+        R.MAIN_ID,
+        M.CASE_NO,
+        i.name ZONE,
+        j.name STREET,
+        H.ADDRESS ADDRESS,
+        O.FULL_NAME ORGNAME,
+        R.request_time,
+        R.STATUS,
+        R.OPERATOR_TIME,
+        R.suspend,
+        R.address contactAddress
+        FROM T_IDENTIFY_REVIEW R
+        JOIN T_IDENTIFY_MAIN M on m.id = R.main_id
+        JOIN T_IDENTIFY_HOUSE H ON M.ID = H.MAIN_ID
+        JOIN T_BASE_ORG O ON M.ORG_ID = O.ID
+        JOIN T_BASE_DICT_ITEM I ON i.VALUE =H.ZONE and i.GROUP_ID = (SELECT id from T_BASE_DICT_GROUP where KEY ='ZONE')
+        JOIN T_BASE_DICT_ITEM j ON j.VALUE = H.STREET and j.GROUP_ID = (SELECT id from T_BASE_DICT_GROUP where KEY
+        ='STREET')
+        WHERE R.DELETE_FLAG = 0
+        <if test="orgSearch != null and orgSearch !=''">
+            AND  M.ORG_ID = #{orgSearch}
+        </if>
+        <if test="caseNo != null and caseNo !=''">
+            and m.CASE_NO LIKE '%'||#{caseNo}||'%'
+        </if>
+        <if test="street !=null and street !=''">
+            and H.STREET =#{street}
+        </if>
+        <if test="zone !=null and zone !=''">
+            and H.zone =#{zone}
+        </if>
+        <if test="addressSearch != null and addressSearch !=''">
+            AND H.ADDRESS LIKE '%'||#{addressSearch}||'%'
+        </if>
+        <if test="startTime !=null and startTime !=''">
+            and to_char(R.REQUEST_TIME,'yyyy-MM-dd') &gt;=#{startTime}
+        </if>
+        <if test="endTime !=null and endTime !=''">
+            and to_char(R.REQUEST_TIME,'yyyy-MM-dd') &lt;=#{endTime}
+        </if>
+        <if test="content != null and content !=''">
+            AND m.CONTENT = #{content}
+        </if>
+        <if test="status != null and status !=''">
+            AND R.STATUS = #{status}
+        </if>
+        <if test="suspend !=null and suspend !=''">
+            AND R.suspend =#{suspend}
+        </if>
+        <if test="reviewIdList != null and reviewIdList.size() !=0">
+            AND R.ID IN
+            <foreach collection="reviewIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        ORDER BY R.OPERATOR_TIME
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.Review">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_REVIEW (
+        ID,
+        MAIN_ID,
+        Report_Detail_Ids,
+        request_Name,
+        id_Num,
+        contact_Name,
+        phone,
+        address,
+        except_expert_ids,
+        REASON,
+        sheet_Id,
+        STATUS,
+        SUSPEND,
+        OPERATOR_TIME,
+        DELETE_FLAG,
+        REQUEST_TIME,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+        #{id},
+        #{mainId},
+        #{reportDetailIds},
+        #{requestName},
+        #{idNum},
+        #{contactName},
+        #{phone},
+        #{contactAddress},
+        #{exceptExpertIds},
+        #{reason},
+        #{sheetId},
+        #{status},
+        #{suspend},
+        #{operatorTime},
+        0,
+        sysdate,
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.Review">
+        UPDATE T_IDENTIFY_REVIEW
+        SET
+            MAIN_ID       = #{mainId},
+            OPERATOR_TIME = #{operatorTime},
+            SUSPEND       = #{suspend},
+            REASON        = #{reason},
+            STATUS        = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM T_IDENTIFY_REVIEW
+        WHERE id = #{id}
+    </delete>
+    <select id="getByMainId" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_REVIEW
+        where MAIN_ID = #{mainId}
+          and DELETE_FLAG = 0
+    </select>
+
+</mapper>

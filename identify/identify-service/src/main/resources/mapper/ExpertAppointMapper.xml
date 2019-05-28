@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.ExpertAppointMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.ExpertAppoint">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_REVIEW_APPOINT
+        WHERE DELETE_FLAG = 0
+        AND id = #{id}
+    </select>
+
+    <select id="getExpertAppoint" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_REVIEW_APPOINT
+        WHERE DELETE_FLAG = 0
+        AND REVIEW_ID = #{reviewId}
+        AND EXPERT_FIELD = #{expertField}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_REVIEW_APPOINT
+    </select>
+
+    <select id="getAppointExpertListByReviewId" parameterType="String" resultMap="map">
+        SELECT
+              a.ID,
+              a.REVIEW_ID,
+              a.EXPERT_FIELD,
+              a.EXPERT_NO,
+              (
+                SELECT b.NAME
+                FROM T_BASE_DICT_ITEM b, T_BASE_DICT_GROUP c
+                WHERE b.VALUE = to_char(a.EXPERT_FIELD) AND b.GROUP_ID = c.ID AND c.KEY = 'EXPERT_BUSINESS_AREA'
+              ) expertFieldName
+        FROM T_IDENTIFY_REVIEW_APPOINT a
+        WHERE a.DELETE_FLAG = 0
+        AND a.REVIEW_ID = #{reviewId}
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.ExpertAppoint">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_REVIEW_APPOINT (
+                ID,
+                REVIEW_ID,
+                EXPERT_FIELD,
+                EXPERT_NO,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+            #{id},
+            #{reviewId},
+            #{expertField},
+            #{expertNo},
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.ExpertAppoint">
+        UPDATE T_IDENTIFY_REVIEW_APPOINT
+        SET
+            ID = #{id},
+            REVIEW_ID = #{reviewId},
+            EXPERT_FIELD = #{expertField},
+            EXPERT_NO = #{expertNo}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_REVIEW_APPOINT
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="insertExpertAppointList">
+        insert into T_IDENTIFY_REVIEW_APPOINT(ID, REVIEW_ID, EXPERT_FIELD, EXPERT_NO)
+        SELECT A.* FROM (
+        <foreach collection="expertAppointList" item="item" index="index" open="" close="" separator="UNION ALL">
+            SELECT
+            SYS_GUID() ID,
+            #{item.reviewId} REVIEW_ID,
+            #{item.expertField} EXPERT_FIELD,
+            #{item.expertNo} EXPERT_NO
+            FROM DUAL
+        </foreach>
+        ) A
+    </insert>
+
+</mapper>

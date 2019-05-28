@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--add by wangwj 20190305 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyOrgPersonMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyOrgPerson">
+        <id property="id" column="id"/>
+        <collection property="identifyOrgResumeList"  column="id"
+                    select="com.thinvent.nj.identify.mapper.IdentifyOrgResumeMapper.getIdentifyOrgResumeListByPersonId"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_PERSON
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_PERSON
+    </select>
+
+    <!--add by wangwj 20190306 start-->
+    <select id="getIdentifyOrgPersonListByMainId" parameterType="String" resultMap="map">
+      SELECT *
+      FROM T_IDENTIFY_ORG_PERSON WHERE DELETE_FLAG=0 AND ORG_ID=#{id}
+    </select>
+
+    <!--add by wangwj 20190306 end-->
+
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgPerson">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ORG_PERSON (
+                BIRTHDAY,
+                TYPE,
+                EDUCATION,
+                TITLE_DEGREE,
+                CERTIFICATE_NO,
+                PRACTISE,
+                REG_CERTIFICATE_NO,
+                ID,
+                ORG_ID,
+                NAME,
+                SEX,
+                GRADUATION,
+                WORK_YEAR,
+                OFFICE_PHONE,
+                PHONE,
+                PUNISHMENT,
+                IDENTITY_NO
+        )
+        VALUES (
+            #{birthday},
+            #{type},
+            #{education},
+            #{titleDegree},
+            #{certificateNo},
+            #{practise},
+            #{regCertificateNo},
+            #{id},
+            #{orgId},
+            #{name},
+            #{sex},
+            #{graduation},
+            #{workYear},
+            #{officePhone},
+            #{phone},
+            #{punishment},
+            #{identityNo}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgPerson">
+        UPDATE T_IDENTIFY_ORG_PERSON
+        SET
+            BIRTHDAY = #{birthday},
+            TYPE = #{type},
+            EDUCATION = #{education},
+            TITLE_DEGREE = #{titleDegree},
+            CERTIFICATE_NO = #{certificateNo},
+            PRACTISE = #{practise},
+            REG_CERTIFICATE_NO = #{regCertificateNo},
+            ID = #{id},
+            ORG_ID = #{orgId},
+            NAME = #{name},
+            SEX = #{sex},
+            GRADUATION = #{graduation},
+            WORK_YEAR = #{workYear},
+            OFFICE_PHONE = #{officePhone},
+            PHONE = #{phone},
+            PUNISHMENT = #{punishment},
+            IDENTITY_NO = #{identityNo}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ORG_PERSON
+        WHERE id = #{id}
+    </delete>
+
+    <!--add by wangwj 20190320 start-->
+    <update id="deleteIdentifyOrgPersonListByMainId" parameterType="string">
+         UPDATE T_IDENTIFY_ORG_PERSON
+         SET
+         DELETE_FLAG =1
+        WHERE ORG_ID =#{mainId}
+    </update>
+
+    <!--add by wangwj 20190320 end-->
+</mapper>
+        <!--add by wangwj 20190305 end -->

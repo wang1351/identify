@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- add by xujc 2018/11/30 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyAcceptMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyAccept">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ACCEPT
+        WHERE id = #{id}
+    </select>
+
+    <select id="getIdentifyAcceptByMainId" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ACCEPT
+        WHERE  DELETE_FLAG = 0
+        AND MAIN_ID = #{mainId}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ACCEPT
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyAccept">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ACCEPT (
+                ID,
+                ACCEPT,
+                FILE_ID,
+                CHARGE_ID,
+                MAIN_ID,
+                REQUIRE_DATE,
+                EMERGENCY,
+                UNACCEPT_REASON,
+                JOIN_PERSON,
+                CREATE_TIME,
+                CREATE_USER_NAME,
+                CREATE_USER
+        )
+        VALUES (
+            #{id},
+            #{accept},
+            #{fileId},
+            #{chargeId},
+            #{mainId},
+            #{requireDate},
+            #{emergency},
+            #{unacceptReason},
+            #{joinPerson},
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyAccept">
+        UPDATE T_IDENTIFY_ACCEPT
+        SET
+            ID = #{id},
+            ACCEPT = #{accept},
+            FILE_ID = #{fileId},
+            CHARGE_ID = #{chargeId},
+            MAIN_ID = #{mainId},
+            REQUIRE_DATE = #{requireDate},
+            EMERGENCY = #{emergency},
+            UNACCEPT_REASON = #{unacceptReason},
+            JOIN_PERSON = #{joinPerson}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ACCEPT
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
+<!-- add by xujc 2018/11/30 end -->

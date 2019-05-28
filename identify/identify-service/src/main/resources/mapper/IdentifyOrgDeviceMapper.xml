@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--add by wangwj 20190305 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyOrgDeviceMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyOrgDevice">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_DEVICE
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_DEVICE
+    </select>
+
+    <!--add by wangwj 20190306 start-->
+      <select id="getIdentifyOrgDeviceListByMainId" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_ORG_DEVICE WHERE DELETE_FLAG=0 AND ORG_ID=#{mainId}
+      </select>
+    <!--add by wangwj 20190306 end-->
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgDevice">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ORG_DEVICE (
+                ID,
+                ORG_ID,
+                NAME,
+                SEQ,
+                NUM,
+                REMARKS,
+                SPECIFICATION
+        )
+        VALUES (
+            #{id},
+            #{orgId},
+            #{name},
+            #{seq},
+            #{num},
+            #{remarks},
+            #{specification}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyOrgDevice">
+        UPDATE T_IDENTIFY_ORG_DEVICE
+        SET
+            ID = #{id},
+            ORG_ID = #{orgId},
+            NAME = #{name},
+            SEQ = #{seq},
+            NUM = #{num},
+            REMARKS = #{remarks},
+            SPECIFICATION = #{specification}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ORG_DEVICE
+        WHERE id = #{id}
+    </delete>
+
+    <update id="deleteIdentifyOrgDevice" parameterType="String">
+        UPDATE T_IDENTIFY_ORG_DEVICE
+        SET
+          DELETE_FLAG =1
+        WHERE ORG_ID =#{mainId}
+
+    </update>
+
+</mapper>
+
+        <!--add by wangwj 20190305 end -->

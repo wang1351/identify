@@ -1,0 +1,20 @@
+.bfont {
+    font-weight: 600;
+}
+#btTable td,
+table th,table td{
+    vertical-align:middle!important;/*设置垂直居中*/
+}
+
+.btn-blue {
+    background-color: #3598db !important;
+}
+.textHide {
+    display: none!important;
+}
+th{
+    text-align: right;!important;
+}
+td{
+    text-align: left;
+}

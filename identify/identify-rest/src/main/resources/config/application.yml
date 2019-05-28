@@ -1,0 +1,43 @@
+
+#dubbo config
+dubbo:
+  applicationName: identify-rest
+
+# swagger
+swagger:
+  controller:
+    package: com.thinvent.nj.identify.controller
+  title: 房安-鉴定子系统 REST API
+  api:
+    version: v1.0.0
+
+redis:
+  switch: 1
+
+#actuator management
+management:
+  context-path: /actuator
+  security:
+    enabled: false
+  health:
+    redis:
+      enabled: true
+
+
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  resources:
+    add-mappings: true
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/
+
+server:
+  error:
+    whitelabel:
+      enabled: false

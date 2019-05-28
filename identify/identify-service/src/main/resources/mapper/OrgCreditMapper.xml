@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- add by xujc 2018/11/30 start -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.OrgCreditMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.OrgCredit">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="fileMap" type="com.thinvent.nj.identify.entity.OrgCreditScore">
+        <id property="id" column="id"/>
+        <collection property="orgCreditFileIds" select="com.thinvent.nj.identify.mapper.OrgCreditMapper.getFileId"
+        column="orgCreditScoreId =id" ofType="string" >
+
+        </collection>
+    </resultMap>
+    <select id="get" resultMap="map">
+        SELECT * FROM T_IDENTIFY_ORG_CREDIT where ID=#{id}
+    </select>
+    <select id="getListByOrgIdAndType" resultMap="map">
+        SELECT
+        a.ID,
+        b.id identifyOrgId,
+        a.CREDIT_GRADE_NAME,
+        a.CREDIT_GRADE_SCORE,
+        a.SCORE_YEAR,
+        b.NAME orgName,
+        b.LEGAL_PERSON,
+        b.UNIFIED_CODE,
+        a.STATUS
+        FROM T_IDENTIFY_ORG b LEFT JOIN T_IDENTIFY_ORG_CREDIT a
+        ON a.IDENTIFY_ORG_ID = b.ID
+       <!-- update by xujc 2019/1/17 start -->
+        <if test="type==1">
+           and to_number(to_char(a.SCORE_YEAR, 'yyyy')) = (to_number(to_char(sysdate, 'yyyy'))) and a.STATUS =0
+        </if>
+        <if test="type==2">
+            and (to_number(to_char(a.SCORE_YEAR, 'yyyy')) != (to_number(to_char(sysdate, 'yyyy'))) or a.STATUS=1)
+        </if>
+        <if test="type==3">
+            and to_number(to_char(a.SCORE_YEAR, 'yyyy')) = (to_number(to_char(sysdate, 'yyyy'))) and a.STATUS =0
+        </if>
+        WHERE
+        b.Id = #{orgId}
+        <!-- update by xujc 2019/1/17 end -->
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT
+        a.ID,
+        b.id identifyOrgId,
+        a.CREDIT_GRADE_NAME,
+        a.CREDIT_GRADE_SCORE,
+        a.SCORE_YEAR,
+        b.NAME orgName,
+        c.NAME LEGAL_PERSON,
+        b.UNIFIED_CODE,
+        a.STATUS
+        FROM T_IDENTIFY_ORG_MAIN b LEFT JOIN T_IDENTIFY_ORG_CREDIT a
+        ON a.IDENTIFY_ORG_ID = b.ID
+            AND to_number(to_char(nvl(a.SCORE_YEAR,''), 'yyyy')) = to_number(to_char(sysdate, 'yyyy'))
+
+        LEFT JOIN T_IDENTIFY_ORG_PERSON c on c.ORG_ID =b.ID
+        where 1=1
+        <if test="orgName !=null and orgName !=''">
+            and b.NAME LIKE '%'||#{orgName}||'%'
+        </if>
+        <if test="creditGrade !=null and creditGrade !=''">
+            AND a.CREDIT_GRADE_NAME =#{creditGrade}
+        </if>
+        <if test="startScore !=null and startScore !=''">
+            AND a.CREDIT_GRADE_SCORE >=#{startScore}
+        </if>
+        <if test="endScore !=null and endScore !=''">
+            AND a.CREDIT_GRADE_SCORE &lt;=#{endScore}
+        </if>
+        <if test="status !=null and status !=''">
+            AND a.USE_STATUS =#{status}
+        </if>
+        <if test="identifyOrgId !=null and identifyOrgId !=''">
+          AND  b.ID = #{identifyOrgId}
+        </if>
+
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.OrgCredit">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_ORG_CREDIT
+        VALUES (
+        #{id},
+        #{identifyOrgId},
+        #{creditGradeName},
+        #{creditGradeScore},
+        #{scoreYear},
+        sysdate,#{createUsername},#{createUser},#{updateTime},#{updateUsername},#{updateUser},#{deleteTime},#{deleteUsername},#{deleteUser},0,0
+        )
+
+    </insert>
+
+   <insert id="addOrgCreditScore" parameterType="com.thinvent.nj.identify.entity.OrgCreditScore">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+        INSERT INTO T_IDENTIFY_ORG_CREDIT_SCORE
+       VALUES(
+       #{id}, #{orgCreditId},
+       #{orgScoreType}, #{scoreStandardId},
+       #{scoreStandardNum}, #{scoreStandardTotal},
+       sysdate,#{createUsername},#{createUser},#{updateTime},#{updateUsername},#{updateUser},#{deleteTime},#{deleteUsername},#{deleteUser},0
+       )
+
+    </insert>
+
+    <insert id="addOrgCreditFile" parameterType="com.thinvent.nj.identify.entity.OrgCreditFile">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+        INSERT INTO T_IDENTIFY_ORG_CREDIT_File
+        VALUES(
+        #{id}, #{orgCreditScoreId},
+        #{orgCreditFileId},
+        sysdate,#{createUsername},#{createUser},#{updateTime},#{updateUsername},#{updateUser},#{deleteTime},#{deleteUsername},#{deleteUser},0
+        )
+    </insert>
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.OrgCredit">
+        UPDATE T_IDENTIFY_ORG_CREDIT
+        SET
+            ID = #{id},
+            SCORE_YEAR = #{scoreYear},
+            IDENTIFY_ORG_ID = #{identifyOrgId},
+            CREDIT_GRADE_SCORE = #{creditGradeScore},
+            CREDIT_GRADE_NAME = #{creditGradeName},
+            update_Time= sysdate,
+              update_User_name =#{updateUsername},
+            update_User =#{updateUser},
+            STATUS =#{status}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_ORG_CREDIT
+
+        WHERE id = #{id}
+    </delete>
+
+    <update id="deleteOrgCreditScore" parameterType="string">
+        UPDATE T_IDENTIFY_ORG_CREDIT_SCORE
+        SET
+              DELETE_Time= sysdate,
+              DELETE_User_name =#{updateUsername},
+              DELETE_User =#{updateUser},
+              DELETE_FLAG = 1
+
+        WHERE id = #{id}
+    </update>
+    <update id="deleteOrgCreditFile" parameterType="string">
+        UPDATE T_IDENTIFY_ORG_CREDIT_FILE
+        SET
+        DELETE_Time= sysdate,
+        DELETE_User_name =#{updateUsername},
+        DELETE_User =#{updateUser},
+        DELETE_FLAG = 1
+
+        WHERE ORG_CREDIT_FILE_ID = #{id}
+    </update>
+
+    <select id="getListByOrgCreditId" resultMap="fileMap">
+        SELECT  a.*
+        FROM T_IDENTIFY_ORG_CREDIT_SCORE a
+        where a.ORG_CREDIT_ID = #{OrgCreditId} and a.DELETE_FLAG=0
+    </select>
+
+
+    <select id="getByOrgCreditIdAndOrgScoreType" resultMap="fileMap">
+        SELECT  a.*
+        FROM T_IDENTIFY_ORG_CREDIT_SCORE a
+        where a.ORG_CREDIT_ID = #{orgCreditId} and a.DELETE_FLAG=0 and a.ORG_SCORE_TYPE=#{orgScoreType}
+    </select>
+    <select id="getFileId" resultType="string">
+        SELECT ORG_CREDIT_FILE_ID from T_IDENTIFY_ORG_CREDIT_FILE where ORG_CREDIT_SCORE_ID =#{orgCreditScoreId} AND DELETE_FLAG= 0
+    </select>
+
+
+    <select id="getByScore" resultType="com.thinvent.nj.identify.entity.CreditGrade">
+          SELECT a.* FROM T_IDENTIFY_CREDIT_GRADE a
+          where #{score} BETWEEN nvl(a.GET,-1000) and nvl(a.LET,1000)
+    </select>
+    <select id="getOrgCreditScoreList" resultMap="fileMap">
+        SELECT b.*
+        FROM T_IDENTIFY_ORG_CREDIT a, T_IDENTIFY_ORG_CREDIT_SCORE b
+        WHERE a.id = b.ORG_CREDIT_ID
+      AND a.IDENTIFY_ORG_ID = #{identifyOrgId}
+        AND to_char(a.SCORE_YEAR, 'yyyy') = #{year}
+       AND
+      b.ORG_SCORE_TYPE = #{orgScoreType} and b.DELETE_FLAG=0
+
+        <if test='year==time'>
+             and a.STATUS =1
+        </if>
+
+    </select>
+
+</mapper>
+<!-- add by xujc 2018/11/30 end -->

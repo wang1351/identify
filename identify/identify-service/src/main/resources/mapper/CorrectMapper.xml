@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.CorrectMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.Correct">
+        <id property="id" column="id"/>
+    </resultMap>
+    <resultMap id="allMap" type="com.thinvent.nj.identify.entity.Correct">
+        <id property="id" column="id"/>
+        <result property="mainId" column="main_id"/>
+        <association property="identifyMain" column="main_Id"
+                     select="com.thinvent.nj.identify.mapper.IdentifyMainMapper.get"/>
+        <association property="correctUpload" column="id"
+                     select="com.thinvent.nj.identify.mapper.CorrectUploadMapper.getByCorrectId"></association>
+        <collection property="correctFileIds" ofType="com.thinvent.nj.identify.entity.CorrectFile"
+                    column="id" select="com.thinvent.nj.identify.mapper.CorrectFileMapper.getFileListByCorrectId">
+        </collection>
+    </resultMap>
+
+    <select id="get" parameterType="string" resultMap="allMap">
+        SELECT *
+        from T_IDENTIFY_CORRECT
+        where DELETE_FLAG = 0
+          and ID = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT
+        C.ID,
+        C.MAIN_ID,
+        A.CASE_NO,
+        A.ZONE,
+        A.STREET,
+        A.ADDRESS,
+        A.ORGNAME,
+        C.OPERATOR_TIME,
+        C.STATUS,
+        c.SUSPEND,
+        C.REQUEST_TIME
+        FROM T_IDENTIFY_CORRECT C
+        JOIN (
+        SELECT
+        M.ID,
+        M.CASE_NO,
+        O.FULL_NAME ORGNAME,
+        (SELECT I.NAME
+        FROM T_BASE_DICT_ITEM I, T_BASE_DICT_GROUP G
+        WHERE I.GROUP_ID = G.ID AND G.KEY = 'ZONE' AND I.VALUE = H.ZONE
+        ) ZONE,
+        (SELECT I.NAME
+        FROM T_BASE_DICT_ITEM I, T_BASE_DICT_GROUP G
+        WHERE I.GROUP_ID = G.ID AND G.KEY = 'STREET' AND I.VALUE = H.STREET
+        ) STREET,
+        H.ADDRESS ADDRESS,
+        M.CONTENT,
+        M.ORG_ID
+        FROM
+        T_IDENTIFY_MAIN M
+        JOIN T_IDENTIFY_HOUSE H ON M.ID = H.MAIN_ID
+        JOIN T_BASE_ORG O ON M.ORG_ID = O.ID
+        WHERE M.DELETE_FLAG = 0
+        <if test="zone !=null and zone !=''">
+            and H.Zone = #{zone}
+        </if>
+        <if test="street !=null and street !=''">
+            and H.street = #{street}
+        </if>
+        <if test="address !=null and address !=''">
+            and H.address LIKE '%'||#{address}||'%'
+        </if>
+        ) A ON C.MAIN_ID = A.ID WHERE C.DELETE_FLAG = 0
+        <if test="caseNo != null and caseNo !=''">
+            and A.CASE_NO LIKE '%'||#{caseNo}||'%'
+        </if>
+
+        <if test="startTime !=null and startTime !=''">
+            and to_char(C.REQUEST_TIME,'yyyy-MM-dd') &gt;=#{startTime}
+        </if>
+        <if test="endTime !=null and endTime !=''">
+            and to_char(C.REQUEST_TIME,'yyyy-MM-dd') &lt;=#{endTime}
+        </if>
+        <if test="content != null and content !=''">
+            AND A.CONTENT = #{content}
+        </if>
+        <if test="status != null and status !=''">
+            AND C.STATUS = #{status}
+        </if>
+        <if test="orgSearch != null and orgSearch !=''">
+            AND A.ORG_ID = #{orgSearch}
+        </if>
+        <if test="suspend !=null and suspend !=''">
+            AND C.suspend =#{suspend}
+        </if>
+        <if test="correctIdList != null and correctIdList.size() !=0">
+            AND C.ID IN
+            <foreach collection="correctIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+        ORDER BY C.OPERATOR_TIME
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.Correct">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_CORRECT (
+        ID,
+        MAIN_ID,
+        STATUS,
+        REASON,
+        suspend,
+        operator_time,
+        DELETE_FLAG,
+        request_time,
+        REPORT_DETAIL_IDS,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+        #{id},
+        #{mainId},
+        #{status},
+        #{reason},
+        #{suspend},
+        sysdate,
+        0,
+        sysdate,
+        #{reportDetailIds},
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.Correct">
+        UPDATE T_IDENTIFY_CORRECT
+        SET
+            MAIN_ID       = #{mainId},
+            STATUS        = #{status},
+            REASON        = #{reason},
+            SUSPEND       =#{suspend},
+            OPERATOR_TIME =sysdate
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM T_IDENTIFY_CORRECT
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getByMainId" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_CORRECT
+        where MAIN_ID = #{mainId}
+          and DELETE_FLAG = 0
+    </select>
+
+</mapper>

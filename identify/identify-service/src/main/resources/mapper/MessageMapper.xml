@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.MessageMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.Message">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT *
+        FROM T_BASE_MESSAGE
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_BASE_MESSAGE
+        where RECEIVE_USER_ID = #{userId}
+        ORDER BY STATUS, ADD_TIME
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.Message">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_BASE_MESSAGE(
+        ID,
+        TITLE,
+        CONTENT,
+        ADD_TIME,
+        STATUS,
+        MSG_TYPE,
+        RECEIVE_USER_ID) VALUES (
+        #{id},
+        #{title},
+        #{content},
+        sysdate,
+        0,
+        #{msgType},
+        #{receiveUserId}
+        )
+
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.Message">
+        UPDATE T_BASE_MESSAGE
+        SET
+            READ_TIME = sysdate,
+            STATUS    = 1
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM T_BASE_MESSAGE
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getUnreadCount" parameterType="String" resultType="Integer">
+        SELECT count(*)
+        FROM T_BASE_MESSAGE
+        where STATUS = 0
+          and RECEIVE_USER_ID = #{userId}
+    </select>
+
+</mapper>

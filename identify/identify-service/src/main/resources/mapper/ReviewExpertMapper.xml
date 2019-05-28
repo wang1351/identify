@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.ReviewExpertMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.ReviewExpert">
+        <id property="id" column="id"/>
+
+    </resultMap>
+    <resultMap id="allMap" type="com.thinvent.nj.identify.entity.ReviewExpert">
+        <id property="id" column="id"/>
+    </resultMap>
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT c.*,(SELECT a.NAME  FROM T_BASE_DICT_ITEM a,T_BASE_DICT_GROUP b where a.GROUP_ID=b.id and b."KEY" ='EXPERT_BUSINESS_AREA' and a."VALUE" =to_char(c.EXPERT_FIELD)) expertFieldName
+        FROM T_IDENTIFY_REVIEW_EXPERT c
+        WHERE c.id = #{id}
+    </select>
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT c.*,(SELECT a.NAME  FROM T_BASE_DICT_ITEM a,T_BASE_DICT_GROUP b where a.GROUP_ID=b.id and b."KEY" ='EXPERT_BUSINESS_AREA' and a."VALUE" =to_char(c.EXPERT_FIELD)) expertFieldName
+        FROM T_IDENTIFY_REVIEW_EXPERT c where c.DELETE_FLAG = 0
+        <if test="reviewId !=null and reviewId !=''">
+            and c.REVIEW_ID =#{reviewId}
+        </if>
+        <if test="type !=null and type !=''">
+            AND c.type =#{type}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.ReviewExpert">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_REVIEW_EXPERT (
+            ID,
+            REVIEW_ID,
+            method,
+            type,
+            EXPERT_FIELD,
+            EXPERT_IDs,
+          DELETE_FLAG,
+        CREATE_TIME,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+            #{id},
+            #{reviewId},
+        #{method},
+        #{type},
+            #{expertField},
+            #{expertIds},
+            0,
+        sysdate,
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.ReviewExpert">
+        UPDATE T_IDENTIFY_REVIEW_EXPERT
+        SET
+            ID = #{id},
+            REVIEW_ID = #{reviewId},
+            EXPERT_ID = #{expertId},
+            EXPERT_NAME = #{expertName},
+            OPERATOR_USER_NAME = #{operatorUserName},
+            OPERATOR_TIME = #{operatorTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM T_IDENTIFY_REVIEW_EXPERT
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

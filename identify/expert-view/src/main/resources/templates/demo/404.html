@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>流程</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="shortcut icon" href="http://127.0.0.1:8080/identify/img/favicon.ico" type="image/x-icon">
+    <title></title>
+
+    <!-- vendor components css -->
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/bootstrap/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/font-awesome/css/font-awesome.css"/>
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/animate/css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/ztree/metroStyle/metroStyle.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/pace/pace-theme-flash.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/js/vendor/layer/skin/layer.css" id="layui_layer_skinlayercss">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/vendor/uploader/webuploader.css">
+
+    <!-- plugins css -->
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/plugins/jquery-ui/jquery-ui-1.10.4.min.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/plugins/bootstrap/bootstrap-table.min.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/plugins/bootstrap/bootstrap-datetimepicker.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/js/plugins/bootstrap/select/css/bootstrap-select.css">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/js/plugins/bootstrap/bootstrap-switch.css">
+
+    <!-- custom css -->
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/main/core.css?v=1.0.1">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/skin/theme-default/main.css?v=1.0.1" id="theme-change">
+    <link type="text/css" rel="stylesheet" href="http://172.16.5.212/css/main/layout.css">
+
+    <link type="text/css" rel="stylesheet" href="http://127.0.0.1:8080/identify/css/main/common.css">
+    <link type="text/css" rel="stylesheet" href="http://127.0.0.1:8080/identify/css/modules/error.css">
+
+</head>
+<body>
+<a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+
+<div id="header-topbar">
+    <nav id="topbar" class="navbar navbar-default navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span
+                    class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                    class="icon-bar"></span><span
+                    class="icon-bar"></span>
+            </button>
+            <a id="logo" href="/identify" class="navbar-brand">
+                <span class="logo-text">南京智慧房安管理服务平台</span>
+                <span class="logo-text-icon" style="display: none;"></span>
+            </a>
+        </div>
+        <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+            <ul class="nav navbar-nav horizontal-menu" id="first_menus_id">
+                <li id="796D45D40BF8507BE05010AC0C05557A" context="/identify" href="http://127.0.0.1:8080/identify" class="">
+                    <a><span class="nav-img"><img
+                            src="http://172.16.5.212/img/nav/nav_aqjd.png"></span><span
+                            class="nav-title">安全鉴定</span></a>
+                </li>
+                <li id="703CF09B52FE4738A42C31A6B41785C5" context="/uc" href="http://127.0.0.1:8080/uc" class="">
+                    <a><span class="nav-img"><img
+                            src="http://172.16.5.212/img/nav/nav_sy.png"></span><span
+                            class="nav-title">基础信息</span></a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar navbar-top-links navbar-right mbn">
+                <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i
+                        class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <p>You have 14 new notifications</p>
+                        </li>
+                        <li>
+                            <div class="dropdown-slimscroll">
+                                <ul>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-blue"><i
+                                            class="fa fa-comment"></i></span>New Comment<span
+                                            class="pull-right text-muted small">4 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-violet"><i
+                                            class="fa fa-twitter"></i></span>3 New Followers<span
+                                            class="pull-right text-muted small">12 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-pink"><i
+                                            class="fa fa-envelope"></i></span>Message Sent<span
+                                            class="pull-right text-muted small">15 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span
+                                            class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span
+                                            class="pull-right text-muted small">18 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-yellow"><i
+                                            class="fa fa-upload"></i></span>Server Rebooted<span
+                                            class="pull-right text-muted small">19 mins ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span
+                                            class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span
+                                            class="pull-right text-muted small">2 days ago</span></a>
+                                    </li>
+                                    <li><a href="extra-user-list.html" target="_blank"><span class="label label-pink"><i
+                                            class="fa fa-envelope"></i></span>Message Sent<span
+                                            class="pull-right text-muted small">5 days ago</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="last"><a href="extra-user-list.html" class="text-right">See all alerts</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown topbar-user">
+                    <a data-hover="dropdown" href="#" class="dropdown-toggle no-link"><i
+                            class="fa fa-user"></i>&nbsp;朱博文&nbsp;<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user pull-right">
+                        <li><a href="#" data-hover="tooltip" title="修改密码" data-toggle="modal"
+                               data-target="#change-password"><i class="fa fa-key"></i>修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/identify/logout"><i class="fa fa-sign-out"></i>退出</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown hidden-xs">
+                    <a id="theme-setting" href="javascript:void(0);" data-hover="dropdown"
+                       data-step="1"
+                       data-intro="&lt;b&gt;Header&lt;/b&gt;, &lt;b&gt;sidebar&lt;/b&gt;, &lt;b&gt;border style&lt;/b&gt; and &lt;b&gt;color&lt;/b&gt;, all of them can change for you to create the best"
+                       data-position="left" class="dropdown-toggle"><i class="fa fa-cogs"></i></a>
+                    <ul class="dropdown-menu dropdown-theme-setting pull-right">
+                        <li>
+                            <h4 class="mtn">主题</h4>
+                            <select id="list_theme" class="form-control">
+                                <option value="default">默认主题</option>
+                                <option value="a">主题A</option>
+                                <option value="b">主题B</option>
+                                <option value="c">主题C</option>
+                                <option value="d">主题D</option>
+                                <option value="e">主题E</option>
+                                <option value="f">主题F</option>
+                                <option value="g">主题G</option>
+                                <option value="h">主题H</option>
+                                <option value="i">主题I</option>
+                            </select>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="change-password" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" class="close">&times;</button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm" method="post"
+                          action="/identify/sys/users/7B50C6964F3CCD35E05010AC0C053C1E/changePwd"
+                          class="form">
+                        <div class="form-group">
+                            <div class="input-icon right">
+                                <span style="float: left; padding: 6px">原密码</span>
+                                <i class="fa fa-key"></i>
+                                <input type="password" id="password" value="" name="password" class="form-control"
+                                       datatype="*6-16"
+                                       nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" style="float: right;width: 87%"/>
+                                <label class="Validform_checktip"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-icon right">
+                                <span style="float: left; padding: 6px">新密码</span>
+                                <i class="fa fa-key"></i>
+                                <input type="password" id="newPassword" value="" name="newPassword" class="form-control"
+                                       datatype="*6-16"
+                                       nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" style="float: right;width: 87%"/>
+                                <label class="Validform_checktip"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon right">
+                                <span style="float: left; padding: 6px">确认密码</span>
+                                <i class="fa fa-key"></i>
+                                <input type="password" id="newPassword2" value="" name="newPassword2" class="form-control"
+                                       datatype="*6-16"
+                                       nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" style="float: right;width: 87%"/>
+                                <label class="Validform_checktip"></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default" id="closePwd">关闭</button>
+                    <button type="button" class="btn btn-primary" id="changePwd">修改密码</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wrapper">
+    <nav id="sidebar" class="navbar-default navbar-static-side">
+        <div class="sidebar-collapse menu-scroll">
+            <ul id="side-menu" class="nav">
+                <li class="user-panel" style="display:none;">
+                    <div class="thumb"><img src="/identify/" alt="" class="img-circle" />
+                    </div>
+                    <div class="info">
+                        <p>欢迎：</p>
+                        <p><span>朱博文</span> | <a href="/identify/logout" class="sys-logout" data-hover="tooltip" title="退出">退出</a></p>
+
+                        <ul class="list-inline list-unstyled" style="display:none;">
+                            <li><a href="#" data-hover="tooltip" title="个人信息"><i class="fa fa-user"></i></a></li>
+                            <li><a href="/sys/user/7B50C6964F3CCD35E05010AC0C053C1E/avatar" data-hover="tooltip" title="修改头像"><i class="fa fa-camera-retro"></i></a></li>
+                            <li><a href="#" data-hover="tooltip" title="修改密码" data-toggle="modal" data-target="#change-password"><i class="fa fa-key"></i></a></li>
+                            <li><a href="/identify/logout" data-hover="tooltip" title="退出">退出</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-error"></i>
+                        <span class="submenu-title">错误页面</span><span class="fa arrow arrow-span"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li>
+                            <a href="403.html" ><i class="fa fa-error"></i>
+                                <span class="submenu-title">403</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="404.html" ><i class="fa fa-error"></i>
+                                <span class="submenu-title">404</span></a>
+                        </li>
+                        <li>
+                            <a href="500.html" ><i class="fa fa-error"></i>
+                                <span class="submenu-title">500</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper">
+        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            <div class="page-header pull-left">
+                <div class="page-title">鉴定业务详细</div>
+            </div>
+            <ol class="breadcrumb page-breadcrumb" menuIds="">
+                <li class="header">当前位置：</li>
+                <li><a href="#">鉴定业务列表</a></li>
+                <li><a href="#">鉴定业务详细</a></li>
+            </ol>
+            <div class="clearfix"></div>
+        </div>
+        <div class="page-content" id="pageContent">
+            <div class="portlet box">
+                <div class="portlet-body">
+                    <!-- 403 -->
+                    <div id="error-page" class="error-404">
+                        <div id="error-page-content">
+                            <h1>出错啦...</h1>
+                            <p>建筑物维修中，找不到您请求的网页。</p>
+                            <div class="div_btn"><a href="" class="btn btn-danger">返回</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div class="copyright">版权所有 © 2009-2018 南京 思创信息技术有限公司 苏ICP备12007792号</div>
+</div>
+
+<!-- jquery & plugins -->
+<script src="http://172.16.5.212/js/vendor/jquery.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery-ui-1.10.1.custom.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery-validate-1.16.0.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.ztree.all.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.metisMenu.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.slimscroll.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.cookie.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/jquery/jquery.menu.js"></script>
+
+<!-- bootstrap & plugins -->
+<script src="http://172.16.5.212/js/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-switch.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-table.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-table-zh-CN.min.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-hover-dropdown.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/bootstrap-datetimepicker.js"></script>
+<script src="http://172.16.5.212/js/plugins/bootstrap/select/js/bootstrap-select.js"></script>
+
+<!-- upload -->
+<script src="http://172.16.5.212/js/vendor/webuploader.js"></script>
+
+<!-- underscore -->
+<script src="http://172.16.5.212/js/vendor/underscore-1.9.1.js"></script>
+
+<!-- 模拟浏览器进度条组件 -->
+<script src="http://172.16.5.212/js/vendor/pace.min.js"></script>
+
+<!-- layer 组件，消息提示框用 -->
+<script src="http://172.16.5.212/js/vendor/layer/layer.min.js"></script>
+
+<!-- custom -->
+<script src="http://172.16.5.212/js/main/core.js"></script>
+<script src="http://172.16.5.212/js/main/common.js"></script>
+
+<script>
+    $(function(){
+        //初始化
+        $('.lc_side li').eq(0).css('height',$('#div1').height());
+
+        //tabs
+        $('.nav-pills-center a').click(function () {
+            $(this).parent('li').addClass('active').siblings('li').removeClass('active');
+        });
+
+        //lc
+        $('.lc_side a').on('click',function () {
+            var li = $(this).parent('li');
+            var liIndex = li.index() + 1;
+            if(li.hasClass('open')){
+                $('#div' + liIndex).hide();
+                li.css('height','');
+            }else {
+                $('#div' + liIndex).show();
+                var liH = 58 > $('#div' + liIndex).height() ? 58 : $('#div' + liIndex).height();
+                li.css('height',liH);
+            }
+            li.toggleClass('open');
+            return false;
+        });
+    });
+
+</script>
+</body>
+</html>

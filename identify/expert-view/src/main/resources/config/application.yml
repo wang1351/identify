@@ -1,0 +1,48 @@
+dubbo:
+  applicationName: expert-view
+
+redis:
+  switch: 1
+
+# shiro cas
+shiro:
+  filterUrlPattern: /shiro-cas
+  successUrl:
+  failureUrl: /error
+
+cas:
+  loginUrl: ${cas.serverUrlPrefix}/login
+  logoutUrl: ${cas.serverUrlPrefix}/logout
+  service: ${shiro.serverUrlPrefix}${shiro.filterUrlPattern}
+
+login:
+  url: ${cas.loginUrl}?service=${cas.service}
+logout:
+  url: ${cas.logoutUrl}?service=${shiro.serverUrlPrefix}
+
+
+#actuator management
+management:
+  context-path: /actuator
+  security:
+    enabled: false
+
+
+
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  resources:
+    add-mappings: true
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+

@@ -1,0 +1,10 @@
+server:
+  context-path: /rest
+  port: 8090
+
+
+#dubbo config
+dubbo:
+  zookeeper:
+    address: xx.xx.xx.xx:2181
+  version:

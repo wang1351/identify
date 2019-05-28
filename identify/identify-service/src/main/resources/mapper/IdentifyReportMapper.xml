@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinvent.nj.identify.mapper.IdentifyReportMapper">
+    <resultMap id="map" type="com.thinvent.nj.identify.entity.IdentifyReport">
+        <id property="id" column="id"/>
+        <association property="identifyVerify" column="id"
+                     select="com.thinvent.nj.identify.mapper.IdentifyVerifyMapper.getIdentifyVerifyByReportId"/>
+        <collection property="reportDetailList" ofType="com.thinvent.nj.identify.entity.IdentifyReportDetail"
+                    column="id" select="com.thinvent.nj.identify.mapper.IdentifyReportDetailMapper.getByReportId"/>
+    </resultMap>
+
+    <select id="get" parameterType="String" resultMap="map">
+        SELECT a.id,
+               a.main_id,
+               a.METHOD,
+               a.ACTIVE_IDENTIFY,
+               a.IDENTIFY_FILE_ID,
+               a.TESTING_FILE_ID,
+               a.PRO_NAME,
+               a.CASE_NO,
+               a.IDENTIFY_TYPE,
+               a.REPORT_DATE,
+               a.CLIENT_NAME,
+               a.IDENTIFY_ORG_NAME,
+               a.QR_FILE_ID
+        FROM T_IDENTIFY_REPORT a
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="getIdentifyReportByMainId" parameterType="String" resultMap="map">
+        SELECT a.id,
+               a.main_id,
+               a.METHOD,
+               a.ACTIVE_IDENTIFY,
+               a.IDENTIFY_FILE_ID,
+               a.TESTING_FILE_ID,
+               a.PRO_NAME,
+               a.CASE_NO,
+               a.IDENTIFY_TYPE,
+               a.REPORT_DATE,
+               a.CLIENT_NAME,
+               a.IDENTIFY_ORG_NAME,
+               a.QR_FILE_ID,
+               b.SORT
+        FROM T_IDENTIFY_REPORT a
+                 LEFT JOIN
+                 T_IDENTIFY_RECORD b
+                 on a.id = b.BUSINESS_KEY
+        WHERE a.DELETE_FLAG = 0
+          AND a.MAIN_ID = #{mainId}
+
+        ORDER BY a.CREATE_TIME DESC
+    </select>
+
+
+    <select id="findList" parameterType="map" resultMap="map">
+        SELECT *
+        FROM T_IDENTIFY_REPORT
+    </select>
+
+    <insert id="insert" parameterType="com.thinvent.nj.identify.entity.IdentifyReport">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            SELECT SYS_GUID() FROM DUAL
+        </selectKey>
+
+        INSERT INTO T_IDENTIFY_REPORT (
+        ID,
+        MAIN_ID,
+        method,
+        ACTIVE_IDENTIFY,
+        IDENTIFY_FILE_ID,
+        TESTING_FILE_ID,
+        CREATE_TIME,
+        PRO_NAME,
+        CASE_NO,
+        IDENTIFY_TYPE,
+        REPORT_DATE,
+        CLIENT_NAME,
+        IDENTIFY_ORG_NAME,
+        QR_FILE_ID,
+        CREATE_USER_NAME,
+        CREATE_USER
+        )
+        VALUES (
+        #{id},
+        #{mainId},
+        #{method},
+        #{activeIdentify},
+        #{identifyFileId},
+        #{testingFileId},
+        sysdate,
+        #{proName},
+        #{caseNo},
+        #{identifyType},
+        #{reportDate},
+        #{clientName},
+        #{identifyOrgName},
+        #{qrFileId},
+        #{createUsername},
+        #{createUser}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="com.thinvent.nj.identify.entity.IdentifyReport">
+        UPDATE T_IDENTIFY_REPORT
+        SET
+            MAIN_ID           = #{mainId},
+            METHOD            = #{method},
+            ACTIVE_IDENTIFY   = #{activeIdentify},
+            IDENTIFY_FILE_ID  = #{identifyFileId},
+            TESTING_FILE_ID   = #{testingFileId},
+            PRO_NAME          = #{proName},
+            CASE_NO           = #{caseNo},
+            IDENTIFY_TYPE     = #{identifyType},
+            REPORT_DATE       = #{reportDate},
+            CLIENT_NAME       = #{clientName},
+            IDENTIFY_ORG_NAME = #{identifyOrgName},
+            QR_FILE_ID        = #{qrFileId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE
+        FROM T_IDENTIFY_REPORT
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
